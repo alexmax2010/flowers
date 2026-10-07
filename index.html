@@ -952,64 +952,24 @@
         let isPaused = false;
         let audioMuted = false;
 
-        let audioCtx = null;
         let isAudioPlaying = false;
-        let melodyLoopTimeout = null;
 
-        // Web Audio Synthesizer Setup
-        function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
+        // Audio Setup with capibara_notificacion.mp3
+        const bgMusic = new Audio('capibara_notificacion.mp3');
+        bgMusic.loop = true;
+
+        function startAudio() {
+            if (audioMuted) return;
+            bgMusic.play().then(() => {
+                isAudioPlaying = true;
+            }).catch((err) => {
+                console.log('Audio playback waiting for user gesture or error:', err);
+            });
         }
 
-        function playNote(freq, type = 'sine', duration = 0.25, volume = 0.1) {
-            if (!audioCtx || audioMuted) return;
-            try {
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = type;
-                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-
-                gain.gain.setValueAtTime(volume, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
-
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-
-                osc.start();
-                osc.stop(audioCtx.currentTime + duration);
-            } catch (e) { }
-        }
-
-        const melodyNotes = [
-            { f: 261.63, d: 0.3 }, { f: 261.63, d: 0.3 }, { f: 293.66, d: 0.5 }, { f: 261.63, d: 0.5 }, { f: 349.23, d: 0.5 }, { f: 329.63, d: 0.8 },
-            { f: 261.63, d: 0.3 }, { f: 261.63, d: 0.3 }, { f: 293.66, d: 0.5 }, { f: 261.63, d: 0.5 }, { f: 392.00, d: 0.5 }, { f: 349.23, d: 0.8 },
-            { f: 261.63, d: 0.3 }, { f: 261.63, d: 0.3 }, { f: 523.25, d: 0.5 }, { f: 440.00, d: 0.5 }, { f: 349.23, d: 0.5 }, { f: 329.63, d: 0.5 }, { f: 293.66, d: 0.8 }
-        ];
-
-        function startMelody() {
-            if (isAudioPlaying) return;
-            isAudioPlaying = true;
-            let noteIdx = 0;
-
-            function playNext() {
-                if (!isAudioPlaying || audioMuted) return;
-                const note = melodyNotes[noteIdx];
-                playNote(note.f, 'triangle', note.d, 0.08);
-                noteIdx = (noteIdx + 1) % melodyNotes.length;
-                melodyLoopTimeout = setTimeout(playNext, note.d * 1000 + 100);
-            }
-
-            playNext();
-        }
-
-        function stopMelody() {
+        function stopAudio() {
+            bgMusic.pause();
             isAudioPlaying = false;
-            if (melodyLoopTimeout) clearTimeout(melodyLoopTimeout);
         }
 
         // Particle System for Confetti
@@ -1086,7 +1046,6 @@
                 }
             }
 
-            playNote(523.25, 'sine', 0.15, 0.1);
             startSceneTimer();
         }
 
@@ -1136,8 +1095,7 @@
         const tapArea = document.getElementById('tapArea');
 
         btnStart.addEventListener('click', () => {
-            initAudio();
-            startMelody();
+            startAudio();
             startOverlay.classList.add('hidden');
             showScene(0);
         });
@@ -1147,15 +1105,18 @@
             audioMuted = !audioMuted;
             document.getElementById('audioIcon').textContent = audioMuted ? '🔇' : '🔊';
             if (!audioMuted) {
-                initAudio();
-                startMelody();
+                startAudio();
             } else {
-                stopMelody();
+                stopAudio();
             }
         });
 
         btnReplay.addEventListener('click', (e) => {
             e.stopPropagation();
+            if (!audioMuted) {
+                bgMusic.currentTime = 0;
+                startAudio();
+            }
             showScene(0);
         });
 
