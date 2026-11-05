@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>¡Pablito cumple 7 años! 🦫🎉</title>
+    <style>
+        :root {
+            --bg-top: #E0F2FE;
+            --bg-bottom: #FFF1F2;
+            --primary-yellow: #FDE047;
+            --accent-orange: #FB923C;
+            --soft-pink: #FDA4AF;
+            --soft-green: #86EFAC;
+            --sky-blue: #7DD3FC;
+            --text-dark: #372E2B;
+            --card-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #0f172a;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 9:16 Aspect Ratio Mobile Container LEX*/
+        .story-wrapper {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            max-width: calc(100vh * (9 / 16));
+            max-height: 100vh;
+            background: linear-gradient(180deg, var(--bg-top) 0%, #F0F9FF 50%, var(--bg-bottom) 100%);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding-top: env(safe-area-inset-top, 12px);
+            padding-bottom: env(safe-area-inset-bottom, 16px);
+        }
+
+        /* Particle Overlay Canvas */
+        #particleCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Story Progress Bar Container */
+        .progress-bar-container {
+            position: absolute;
+            top: calc(env(safe-area-inset-top, 10px) + 8px);
+            left: 12px;
+            right: 12px;
+            display: flex;
+            gap: 6px;
+            z-index: 50;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: #F43F5E;
+            border-radius: 4px;
+            transition: width 0.1s linear;
+        }
+
+        /* Floating Background Balloons */
+        .balloon-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 42px;
+            height: 52px;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            animation: floatUp 8s infinite cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0.85;
+        }
+
+        .balloon::after {
+            content: "";
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 14px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.85;
+            }
+
+            90% {
+                opacity: 0.85;
+            }
+
+            100% {
+                transform: translateY(-110vh) rotate(15deg);
+                opacity: 0;
+            }
+        }
+
+        /* Scene Layout */
+        .scene {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 50px 20px 80px 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scale(0.95);
+            z-index: 10;
+        }
+
+        .scene.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+
+        /* Titles and Typography Header */
+        .title-box {
+            text-align: center;
+            margin-top: 15px;
+            z-index: 20;
+        }
+
+        .badge-subtitle {
+            display: inline-block;
+            background: #FEF08A;
+            color: #854D0E;
+            font-weight: 800;
+            font-size: clamp(0.8rem, 3.5vw, 1rem);
+            padding: 6px 16px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: pulseBadge 2s infinite ease-in-out;
+        }
+
+        @keyframes pulseBadge {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .main-heading {
+            font-size: clamp(1.8rem, 7.5vw, 2.3rem);
+            font-weight: 900;
+            color: var(--text-dark);
+            text-shadow: 2px 2px 0px #FFF, 4px 4px 12px rgba(0, 0, 0, 0.08);
+            line-height: 1.15;
+        }
+
+        .number-7-wrapper {
+            display: inline-block;
+            position: relative;
+        }
+
+        .number-7 {
+            font-size: clamp(3.5rem, 15vw, 4.5rem);
+            font-weight: 900;
+            color: #E11D48;
+            display: inline-block;
+            transform-origin: center;
+            animation: bounce7 1.2s infinite alternate cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            text-shadow: 3px 3px 0 #FDE047, 6px 6px 0px rgba(0, 0, 0, 0.12);
+        }
+
+        @keyframes bounce7 {
+            0% {
+                transform: scale(1) rotate(-5deg);
+            }
+
+            100% {
+                transform: scale(1.25) rotate(8deg);
+            }
+        }
+
+        /* SVG Vector Hero Wrapper */
+        .pablito-hero-wrapper {
+            width: clamp(280px, 85vw, 360px);
+            height: clamp(280px, 85vw, 360px);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 15;
+            margin: auto 0;
+            filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.12));
+        }
+
+        .pablito-hero-wrapper svg,
+        .pablito-hero-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Image Animations */
+        .anim-bounce {
+            animation: floatBounce 1.4s infinite alternate ease-in-out;
+        }
+
+        @keyframes floatBounce {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+
+            100% {
+                transform: translateY(-14px) scale(1.02);
+            }
+        }
+
+        .anim-wiggle {
+            animation: happyWiggle 1.4s infinite ease-in-out;
+        }
+
+        @keyframes happyWiggle {
+
+            0%,
+            100% {
+                transform: rotate(0deg) scale(1);
+            }
+
+            25% {
+                transform: rotate(-3deg) scale(1.03);
+            }
+
+            75% {
+                transform: rotate(3deg) scale(1.03);
+            }
+        }
+
+        /* Candle Flame Flicker Animation */
+        .candle-flame {
+            transform-origin: center bottom;
+            animation: flameFlicker 0.6s infinite alternate ease-in-out;
+        }
+
+        @keyframes flameFlicker {
+            0% {
+                transform: scale(1) rotate(-3deg);
+                opacity: 0.95;
+            }
+
+            100% {
+                transform: scale(1.15) rotate(4deg);
+                opacity: 1;
+            }
+        }
+
+        /* Event Info Card Component */
+        .info-card {
+            background: var(--card-bg);
+            border: 3px solid #FFF;
+            border-radius: 24px;
+            padding: 20px 22px;
+            width: 100%;
+            box-shadow: 0 15px 35px rgba(90, 130, 140, 0.12);
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 20;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            transform: translateY(15px);
+            opacity: 0;
+            animation: slideUpItem 0.5s forwards ease-out;
+        }
+
+        .scene.active .info-item:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .scene.active .info-item:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .scene.active .info-item:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .scene.active .info-item:nth-child(4) {
+            animation-delay: 0.8s;
+        }
+
+        @keyframes slideUpItem {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .info-icon {
+            font-size: 1.8rem;
+            width: 44px;
+            height: 44px;
+            background: #FFF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            flex-shrink: 0;
+        }
+
+        .info-text-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            font-size: 0.75rem;
+            color: #78716C;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .info-val {
+            font-size: clamp(1rem, 4vw, 1.15rem);
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+
+        /* Controls Overlay */
+        .controls-overlay {
+            position: absolute;
+            bottom: calc(env(safe-area-inset-bottom, 16px) + 12px);
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 0 16px;
+            z-index: 100;
+        }
+
+        .btn-action {
+            background: #FFF;
+            color: var(--text-dark);
+            border: 2px solid rgba(0, 0, 0, 0.08);
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        .btn-action:active {
+            transform: scale(0.92);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #F43F5E 0%, #FB923C 100%);
+            color: #FFF;
+            border: none;
+            padding: 12px 22px;
+            font-size: 0.95rem;
+            box-shadow: 0 6px 20px rgba(244, 63, 94, 0.4);
+        }
+
+        /* Tap Gesture Layer */
+        .tap-area {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
+        }
+
+        /* Initial Start Screen Overlay */
+        .start-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(224, 242, 254, 0.98), rgba(255, 241, 242, 0.98));
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            text-align: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .start-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .big-play-btn {
+            width: 86px;
+            height: 86px;
+            background: linear-gradient(135deg, #F43F5E, #FDA4AF);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2.2rem;
+            box-shadow: 0 10px 25px rgba(244, 63, 94, 0.4);
+            margin-top: 24px;
+            cursor: pointer;
+            animation: pulsePlay 1.5s infinite;
+        }
+
+        @keyframes pulsePlay {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.6);
+            }
+
+            70% {
+                transform: scale(1.1);
+                box-shadow: 0 0 0 20px rgba(244, 63, 94, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(244, 63, 94, 0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="story-wrapper">
+
+        <!-- Particle Overlay Canvas -->
+        <canvas id="particleCanvas"></canvas>
+
+        <!-- Progress Indicators -->
+        <div class="progress-bar-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="pfill-0"></div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="pfill-1"></div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="pfill-2"></div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="pfill-3"></div>
+            </div>
+        </div>
+
+        <!-- Floating Background Balloons -->
+        <div class="balloon-container">
+            <div class="balloon" style="left: 10%; background: #FDA4AF; animation-delay: 0s;"></div>
+            <div class="balloon" style="left: 30%; background: #93C5FD; animation-delay: 2s;"></div>
+            <div class="balloon" style="left: 65%; background: #FDE047; animation-delay: 4s;"></div>
+            <div class="balloon" style="left: 85%; background: #86EFAC; animation-delay: 1s;"></div>
+        </div>
+
+        <!-- Touch Tap Navigation Layer -->
+        <div class="tap-area" id="tapArea"></div>
+
+        <!-- SVG Template for Pablito and Birthday Cake -->
+        <svg style="display: none;">
+            <g id="pablito-illustration">
+                <defs>
+                    <filter id="soft-shadow" x="-10%" y="-10%" width="120%" height="120%">
+                        <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#8a5a36" flood-opacity="0.08" />
+                    </filter>
+                    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="3" result="blur" />
+                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                    </filter>
+                </defs>
+
+                <g id="background-decorations">
+                    <polygon points="250,290 254,300 265,300 256,307 259,317 250,310 241,317 244,307 235,300 246,300"
+                        fill="#fcd34d" />
+                    <polygon points="630,590 633,598 642,598 635,603 637,611 630,606 623,611 625,603 618,598 627,598"
+                        fill="#fcd34d" />
+                    <polygon points="180,650 183,656 190,656 185,660 187,666 180,662 173,666 175,660 170,656 177,656"
+                        fill="#86efac" />
+
+                    <rect x="190" y="450" width="12" height="6" rx="2" fill="#f472b6" transform="rotate(25 190 450)" />
+                    <rect x="620" y="450" width="14" height="7" rx="2" fill="#38bdf8" transform="rotate(-35 620 450)" />
+                    <rect x="140" y="400" width="10" height="10" rx="2" fill="#fcd34d" transform="rotate(12 140 400)" />
+                    <circle cx="145" cy="410" r="6" fill="#a7f3d0" />
+                    <circle cx="670" cy="415" r="7" fill="#fde68a" />
+                    <circle cx="685" cy="505" r="5" fill="#f472b6" />
+
+                    <path d="M 350 270 A 8 8 0 0 1 364 270 A 8 8 0 0 1 378 270 Q 378 285 364 295 Q 350 285 350 270 Z"
+                        fill="#f472b6" opacity="0.8" />
+                    <path
+                        d="M 150 580 A 10 10 0 0 1 168 580 A 10 10 0 0 1 186 580 Q 186 600 168 612 Q 150 600 150 580 Z"
+                        fill="#f472b6" opacity="0.8" transform="rotate(-15 168 590)" />
+                    <path d="M 660 515 A 8 8 0 0 1 674 515 A 8 8 0 0 1 688 515 Q 688 530 674 540 Q 660 530 660 515 Z"
+                        fill="#f472b6" opacity="0.8" transform="rotate(15 674 525)" />
+                </g>
+
+                <g id="garland">
+                    <path d="M 220 100 Q 400 230 580 100" fill="none" stroke="#5c3d2e" stroke-width="3.5"
+                        stroke-dasharray="6,3" />
+
+                    <g transform="translate(230, 115) rotate(12)">
+                        <polygon points="0,0 36,0 18,48" fill="#fca5a5" stroke="#5c3d2e" stroke-width="3"
+                            stroke-linejoin="round" />
+                        <text x="18" y="24" font-size="16" font-weight="bold" fill="#5c3d2e" text-anchor="middle"
+                            dominant-baseline="middle">7th</text>
+                    </g>
+                    <g transform="translate(270, 133) rotate(8)">
+                        <polygon points="0,0 34,0 17,46" fill="#fef08a" stroke="#5c3d2e" stroke-width="3"
+                            stroke-linejoin="round" />
+                        <text x="17" y="23" font-size="20" font-weight="bold" fill="#5c3d2e" text-anchor="middle"
+                            dominant-baseline="middle">B</text>
+                    </g>
+                    <g transform="translate(308, 146) rotate(5)">
+                        <polygon points="0,0 34,0 17,46" fill="#bbf7d0" stroke="#5c3d2e" stroke-width="3"
+                            stroke-linejoin="round" />
+                        <text x="17" y="23" font-size="20" font-weight="bold" fill="#5c3d2e" text-anchor="middle"
+                            dominant-baseline="middle">I</text>
+                    </g>
+                    <g transform="translate(346, 154) rotate(1)">
+                        <polygon points="0,0 34,0 17,46" fill="#fed7aa" stroke="#5c3d2e" stroke-width="3"
+                            stroke-linejoin="round" />
+                        <text x="17" y="23" font-size="20" font-weight="bold" fill="#5c3d2e" text-anchor="middle"
+                            dominant-baseline="middle">R</text>
+                    </g>
+                    <g transform="translate(384, 155) rotate(-1)">
+                        <polygon points="0,0 34,0 17,46" fill="#bae6fd" stroke="#5c3d2e" stroke-width="3"
+                            stroke-linejoin="round" />
+                        <text x="17" y="23" font-size="20" font-weight="bold" fill="#5c3d2e" text-anchor="middle"
+                            dominant-baseline="middle">T</text>
+                    </g>
+                    <g transform="translate(422, 152) rotate(-4)">
+                        <polygon points="0,0 34,0 17,46" fill="#ddd6fe" stroke="#5c3d2e" stroke-width="3"
+                            stroke-linejoin="round" />
+                        <text x="17" y="23" font-size="20" font-weight="bold" fill="#5c3d2e" text-anchor="middle"
+                            dominant-baseline="middle">H</text>
+                    </g>
+                    <g transform="translate(460, 144) rotate(-7)">
+                        <polygon points="0,0 34,0 17,46" fill="#fbcfe8" stroke="#5c3d2e" stroke-width="3"
+                            stroke-linejoin="round" />
+                        <text x="17" y="23" font-size="20" font-weight="bold" fill="#5c3d2e" text-anchor="middle"
+                            dominant-baseline="middle">D</text>
+                    </g>
+                    <g transform="translate(498, 131) rotate(-10)">
+                        <polygon points="0,0 34,0 17,46" fill="#fef08a" stroke="#5c3d2e" stroke-width="3"
+                            stroke-linejoin="round" />
+                        <text x="17" y="23" font-size="20" font-weight="bold" fill="#5c3d2e" text-anchor="middle"
+                            dominant-baseline="middle">A</text>
+                    </g>
+                    <g transform="translate(536, 113) rotate(-14)">
+                        <polygon points="0,0 36,0 18,48" fill="#bbf7d0" stroke="#5c3d2e" stroke-width="3"
+                            stroke-linejoin="round" />
+                        <text x="18" y="24" font-size="18" font-weight="bold" fill="#5c3d2e" text-anchor="middle"
+                            dominant-baseline="middle">Y!</text>
+                    </g>
+                </g>
+
+                <g id="left-balloons" class="balloon-left interactive-element">
+                    <path d="M 145 280 Q 160 340 180 410" fill="none" stroke="#5c3d2e" stroke-width="2.5" />
+                    <path d="M 185 235 Q 195 310 195 330" fill="none" stroke="#5c3d2e" stroke-width="2.5" />
+
+                    <g transform="translate(145, 280) rotate(-15)">
+                        <ellipse cx="0" cy="0" rx="36" ry="44" fill="#fde047" stroke="#5c3d2e" stroke-width="3.5" />
+                        <polygon points="-4,44 4,44 0,49" fill="#fde047" stroke="#5c3d2e" stroke-width="3" />
+                        <path d="M -15 -20 A 20 25 0 0 1 -5 -35" fill="none" stroke="#ffffff" stroke-width="4"
+                            stroke-linecap="round" opacity="0.7" />
+                        <polygon points="0,-5 3,3 10,3 4,7 6,14 0,10 -6,14 -4,7 -10,3 -3,3" fill="#67e8f9"
+                            opacity="0.9" />
+                    </g>
+
+                    <g transform="translate(185, 230) rotate(5)">
+                        <ellipse cx="0" cy="0" rx="42" ry="52" fill="#a7f3d0" stroke="#5c3d2e" stroke-width="3.5" />
+                        <polygon points="-5,52 5,52 0,58" fill="#a7f3d0" stroke="#5c3d2e" stroke-width="3" />
+                        <path d="M -18 -25 A 25 30 0 0 1 -5 -42" fill="none" stroke="#ffffff" stroke-width="4.5"
+                            stroke-linecap="round" opacity="0.7" />
+                        <polygon points="0,-5 4,4 12,4 5,9 8,17 0,12 -8,17 -5,9 -12,4 -4,4" fill="#f472b6"
+                            opacity="0.8" />
+                    </g>
+                </g>
+
+                <g id="right-balloons" class="balloon-right interactive-element">
+                    <path d="M 615 280 Q 610 350 595 405" fill="none" stroke="#5c3d2e" stroke-width="2.5" />
+                    <path d="M 660 305 Q 640 370 605 440" fill="none" stroke="#5c3d2e" stroke-width="2.5" />
+
+                    <g transform="translate(620, 235) rotate(12)">
+                        <ellipse cx="0" cy="0" rx="43" ry="52" fill="#fbcfe8" stroke="#5c3d2e" stroke-width="3.5" />
+                        <polygon points="-5,52 5,52 0,58" fill="#fbcfe8" stroke="#5c3d2e" stroke-width="3" />
+                        <path d="M -18 -25 A 25 30 0 0 1 -5 -42" fill="none" stroke="#ffffff" stroke-width="4.5"
+                            stroke-linecap="round" opacity="0.7" />
+                        <polygon points="0,-5 4,4 12,4 5,9 8,17 0,12 -8,17 -5,9 -12,4 -4,4" fill="#fde047"
+                            opacity="0.9" />
+                    </g>
+
+                    <g transform="translate(660, 305) rotate(20)">
+                        <ellipse cx="0" cy="0" rx="38" ry="46" fill="#bae6fd" stroke="#5c3d2e" stroke-width="3.5" />
+                        <polygon points="-4,46 4,46 0,52" fill="#bae6fd" stroke="#5c3d2e" stroke-width="3" />
+                        <path d="M -15 -20 A 20 25 0 0 1 -5 -36" fill="none" stroke="#ffffff" stroke-width="4"
+                            stroke-linecap="round" opacity="0.7" />
+                        <polygon points="0,-4 3,3 9,3 4,7 6,13 0,9 -6,13 -4,7 -9,3 -3,3" fill="#f472b6" opacity="0.9" />
+                    </g>
+                </g>
+
+                <g id="capybara" class="interactive-element">
+                    <path
+                        d="M 370 480 C 330 400, 420 300, 520 300 C 620 300, 650 370, 640 450 C 660 500, 660 620, 640 680 C 620 740, 530 750, 450 740 C 390 730, 350 680, 360 600 Z"
+                        fill="#d99b66" stroke="#5c3d2e" stroke-width="4.5" stroke-linejoin="round" />
+                    <path
+                        d="M 430 550 C 410 600, 420 680, 470 700 C 540 730, 590 680, 570 600 C 550 540, 460 510, 430 550 Z"
+                        fill="#fbeada" opacity="0.9" />
+
+                    <!-- Arms -->
+                    <path d="M 405 525 C 370 510, 315 540, 320 575 C 325 595, 355 580, 395 565 Z" fill="#d99b66"
+                        stroke="#5c3d2e" stroke-width="4.5" stroke-linejoin="round" />
+                    <path d="M 315 550 C 310 555, 312 565, 320 565" stroke="#5c3d2e" stroke-width="3" fill="none" />
+                    <path d="M 312 563 C 308 570, 312 576, 322 573" stroke="#5c3d2e" stroke-width="3" fill="none" />
+
+                    <path d="M 605 525 C 645 510, 695 520, 700 555 C 705 580, 670 585, 615 560 Z" fill="#d99b66"
+                        stroke="#5c3d2e" stroke-width="4.5" stroke-linejoin="round" />
+                    <path d="M 692 532 C 702 535, 705 545, 698 552" stroke="#5c3d2e" stroke-width="3" fill="none" />
+                    <path d="M 698 548 C 707 553, 705 563, 693 565" stroke="#5c3d2e" stroke-width="3" fill="none" />
+
+                    <!-- Feet -->
+                    <path d="M 480 710 C 470 730, 465 760, 485 765 C 505 770, 520 745, 510 715 Z" fill="#b07343"
+                        stroke="#5c3d2e" stroke-width="4" />
+                    <path d="M 525 700 C 530 735, 535 770, 560 765 C 585 760, 575 725, 555 695 Z" fill="#b07343"
+                        stroke="#5c3d2e" stroke-width="4" />
+
+                    <!-- Ears -->
+                    <path d="M 435 330 C 420 310, 430 285, 450 300 C 460 310, 455 335, 435 330 Z" fill="#b07343"
+                        stroke="#5c3d2e" stroke-width="4" />
+                    <path d="M 438 318 C 430 310, 435 298, 446 307" fill="#f87171" opacity="0.4" />
+                    <path d="M 590 345 C 610 330, 625 350, 610 365 C 595 380, 585 360, 590 345 Z" fill="#b07343"
+                        stroke="#5c3d2e" stroke-width="4" />
+
+                    <!-- Snout & Face -->
+                    <path d="M 445 440 C 445 390, 545 390, 545 440 C 545 480, 445 480, 445 440 Z" fill="#b07343"
+                        stroke="#5c3d2e" stroke-width="4" />
+                    <path
+                        d="M 470 415 C 470 405, 520 405, 520 415 C 520 435, 495 440, 495 440 C 495 440, 470 435, 470 415 Z"
+                        fill="#5c3d2e" />
+                    <line x1="495" y1="435" x2="495" y2="455" stroke="#5c3d2e" stroke-width="4"
+                        stroke-linecap="round" />
+
+                    <!-- Smile -->
+                    <path d="M 475 460 Q 495 480 515 460" fill="none" stroke="#5c3d2e" stroke-width="4"
+                        stroke-linecap="round" />
+                    <path d="M 483 468 Q 495 488 507 468 Z" fill="#f87171" />
+
+                    <!-- Cheeks -->
+                    <ellipse cx="430" cy="450" rx="18" ry="12" fill="#f472b6" opacity="0.5" />
+                    <ellipse cx="560" cy="460" rx="18" ry="12" fill="#f472b6" opacity="0.5" />
+
+                    <!-- Eyes -->
+                    <circle cx="430" cy="405" r="14" fill="#2d1a10" />
+                    <circle cx="426" cy="400" r="5" fill="#ffffff" />
+                    <circle cx="433" cy="410" r="2" fill="#ffffff" />
+
+                    <circle cx="565" cy="415" r="14" fill="#2d1a10" />
+                    <circle cx="561" cy="410" r="5" fill="#ffffff" />
+                    <circle cx="568" cy="420" r="2" fill="#ffffff" />
+
+                    <!-- Party Hat -->
+                    <g transform="translate(500, 180) rotate(15)">
+                        <path d="M 10 110 L 60 10 L 100 100 C 70 115, 30 115, 10 110 Z" fill="#a7f3d0" stroke="#5c3d2e"
+                            stroke-width="4" stroke-linejoin="round" />
+                        <circle cx="45" cy="70" r="7" fill="#fde047" />
+                        <circle cx="70" cy="85" r="6" fill="#fde047" />
+                        <circle cx="60" cy="40" r="5" fill="#fde047" />
+                        <circle cx="60" cy="8" r="14" fill="#f472b6" stroke="#5c3d2e" stroke-width="3" />
+                        <circle cx="60" cy="8" r="6" fill="#fde047" />
+                    </g>
+                </g>
+
+                <g id="birthday-cake" class="interactive-element" filter="url(#soft-shadow)">
+                    <!-- Stand -->
+                    <ellipse cx="280" cy="710" rx="125" ry="25" fill="#e2e8f0" stroke="#5c3d2e" stroke-width="4" />
+                    <path d="M 260 710 L 250 760 L 310 760 L 300 710 Z" fill="#cbd5e1" stroke="#5c3d2e" stroke-width="4"
+                        stroke-linejoin="round" />
+                    <ellipse cx="280" cy="760" rx="45" ry="12" fill="#e2e8f0" stroke="#5c3d2e" stroke-width="4" />
+
+                    <!-- Lower Cake Tier -->
+                    <path d="M 175 610 L 175 690 A 105 30 0 0 0 385 690 L 385 610 Z" fill="#fef3c7" stroke="#5c3d2e"
+                        stroke-width="4" stroke-linejoin="round" />
+                    <ellipse cx="280" cy="610" rx="105" ry="28" fill="#fffbebe6" stroke="#5c3d2e" stroke-width="4" />
+                    <path
+                        d="M 175 615 C 190 635, 200 635, 210 618 C 220 640, 235 640, 245 620 C 260 645, 280 645, 295 620 C 310 640, 330 640, 340 618 C 355 635, 370 635, 385 615 A 105 28 0 0 1 175 615 Z"
+                        fill="#ffffff" stroke="#5c3d2e" stroke-width="3" />
+                    <path d="M 177 655 A 103 26 0 0 0 383 655" fill="none" stroke="#f472b6" stroke-width="6"
+                        stroke-linecap="round" />
+
+                    <!-- Lower Layer Candies -->
+                    <circle cx="205" cy="670" r="5" fill="#f472b6" />
+                    <circle cx="240" cy="680" r="6" fill="#60a5fa" />
+                    <circle cx="280" cy="685" r="5" fill="#fde047" />
+                    <circle cx="320" cy="680" r="6" fill="#4ade80" />
+                    <circle cx="355" cy="670" r="5" fill="#f472b6" />
+
+                    <g transform="translate(270, 630)">
+                        <rect x="0" y="0" width="20" height="26" rx="6" fill="#bae6fd" stroke="#5c3d2e"
+                            stroke-width="2.5" />
+                        <text x="10" y="15" font-size="16" font-weight="bold" fill="#0284c7" text-anchor="middle"
+                            dominant-baseline="middle">7</text>
+                    </g>
+
+                    <!-- Upper Tier -->
+                    <path d="M 205 520 L 205 580 A 75 22 0 0 0 355 580 L 355 520 Z" fill="#fef3c7" stroke="#5c3d2e"
+                        stroke-width="4" stroke-linejoin="round" />
+                    <ellipse cx="280" cy="520" rx="75" ry="22" fill="#ffffff" stroke="#5c3d2e" stroke-width="4" />
+                    <path
+                        d="M 205 525 C 220 540, 230 540, 240 528 C 255 545, 270 545, 280 528 C 295 545, 310 545, 320 528 C 335 540, 345 540, 355 525 A 75 22 0 0 1 205 525 Z"
+                        fill="#ffffff" stroke="#5c3d2e" stroke-width="3" />
+
+                    <!-- Upper Sprinkles -->
+                    <rect x="230" y="550" width="8" height="4" rx="2" fill="#f472b6" transform="rotate(20 230 550)" />
+                    <rect x="260" y="555" width="8" height="4" rx="2" fill="#60a5fa" transform="rotate(-30 260 555)" />
+                    <rect x="300" y="555" width="8" height="4" rx="2" fill="#4ade80" transform="rotate(15 300 555)" />
+                    <rect x="330" y="545" width="8" height="4" rx="2" fill="#fde047" transform="rotate(-40 330 545)" />
+
+                    <!-- Wick & Candle '7' -->
+                    <line x1="280" y1="500" x2="280" y2="475" stroke="#5c3d2e" stroke-width="3.5"
+                        stroke-linecap="round" />
+                    <g transform="translate(252, 420)">
+                        <path d="M 10 10 L 50 10 L 28 70 L 12 70 L 28 28 L 10 28 Z" fill="#f472b6" stroke="#5c3d2e"
+                            stroke-width="4.5" stroke-linejoin="round" />
+                        <path d="M 15 15 L 44 15 L 25 64 L 17 64 L 31 24 L 15 24 Z" fill="#fbcfe8" />
+                        <circle cx="28" cy="19" r="2.5" fill="#ffffff" />
+                        <circle cx="24" cy="35" r="2.5" fill="#ffffff" />
+                        <circle cx="20" cy="50" r="2.5" fill="#ffffff" />
+                    </g>
+
+                    <!-- Flame -->
+                    <g id="candle-flame" class="flame" transform="translate(280, 410)" filter="url(#glow)">
+                        <path d="M 0 0 C -12 -15, -8 -30, 0 -42 C 8 -30, 12 -15, 0 0 Z" fill="#fb923c" />
+                        <path d="M 0 -4 C -6 -14, -4 -24, 0 -32 C 4 -24, 6 -14, 0 -4 Z" fill="#fde047" />
+                        <circle cx="0" cy="-15" r="4" fill="#ffffff" />
+                    </g>
+                </g>
+
+            </g>
+        </svg>
+
+        <!-- ESCENA 1 — PRESENTACIÓN -->
+        <div class="scene active" id="scene-0">
+            <div class="title-box">
+                <span class="badge-subtitle">✨ ¡Gran Celebración! ✨</span>
+                <h1 class="main-heading">¡Pablito cumple <br>
+                    <span class="number-7-wrapper">
+                        <span class="number-7">7</span>
+                    </span>
+                    años!
+                </h1>
+            </div>
+
+            <div class="pablito-hero-wrapper anim-bounce">
+                <svg viewBox="100 80 600 700">
+                    <use href="#pablito-illustration" />
+                </svg>
+            </div>
+
+            <div
+                style="text-align: center; color: var(--text-dark); font-weight: 800; font-size: 1.15rem; z-index: 20;">
+                🎈 ¡Una fiesta mágica e inolvidable! 🎈
+            </div>
+        </div>
+
+        <!-- ESCENA 2 — INVITACIÓN -->
+        <div class="scene" id="scene-1">
+            <div class="title-box">
+                <span class="badge-subtitle">🎉 ¡Estás Invitado! 🎉</span>
+                <h1 class="main-heading">Ven a celebrar <br>conmigo</h1>
+            </div>
+
+            <div class="pablito-hero-wrapper anim-wiggle">
+                <svg viewBox="100 80 600 700">
+                    <use href="#pablito-illustration" />
+                </svg>
+            </div>
+
+            <div style="text-align: center; color: #854D0E; font-weight: 800; font-size: 1.15rem; z-index: 20;">
+                ¡Habrá pastel, juegos y mucha diversión! 🎂
+            </div>
+        </div>
+
+        <!-- ESCENA 3 — INFORMACIÓN DEL EVENTO -->
+        <div class="scene" id="scene-2">
+            <div class="title-box" style="margin-top: 10px;">
+                <span class="badge-subtitle">📅 Datos del Evento</span>
+                <h1 class="main-heading" style="font-size: 1.8rem;">¿Dónde y Cuándo?</h1>
+            </div>
+
+            <div class="info-card">
+
+
+                <div class="info-item">
+                    <div class="info-icon">📅</div>
+                    <div class="info-text-group">
+                        <span class="info-label">Fecha</span>
+                        <span class="info-val">Sábado 10 de Octubre</span>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">⏰</div>
+                    <div class="info-text-group">
+                        <span class="info-label">Hora</span>
+                        <span class="info-val">15:00 hrs</span>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">📍</div>
+                    <div class="info-text-group">
+                        <span class="info-label">Lugar</span>
+                        <span class="info-val">Casa de Magi</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mini Character Badge for Scene 3 -->
+            <div style="width: 130px; height: 120px; z-index: 15; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1));">
+                <svg viewBox="150 180 550 600">
+                    <use href="#pablito-illustration" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- ESCENA 4 — CIERRE -->
+        <div class="scene" id="scene-3">
+            <div class="title-box">
+                <span class="badge-subtitle">🌟 ¡No Faltes! 🌟</span>
+                <h1 class="main-heading">¡Te esperamos!</h1>
+            </div>
+
+            <div id="fotoPablito" class="pablito-hero-wrapper anim-bounce">
+                <img src="./pablito.webp" alt="Foto de Pablito">
+            </div>
+
+            <div style="text-align: center; margin-bottom: 20px; z-index: 20;">
+                <p
+                    style="font-size: 1.25rem; font-weight: 800; color: #E11D48; text-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                    Será un día súper divertido 🎉
+                </p>
+            </div>
+        </div>
+
+        <!-- Action Controls Bar -->
+        <div class="controls-overlay">
+            <button class="btn-action" id="btnAudio">
+                <span id="audioIcon">🔊</span> Música
+            </button>
+            <button class="btn-action btn-primary" id="btnReplay">
+                ↻ Repetir
+            </button>
+        </div>
+
+        <!-- Initial Start Modal Overlay -->
+        <div class="start-overlay" id="startOverlay">
+            <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px;">
+                <img src="./capi7.png" alt="Ilustración Pablito Capibara"
+                    style="width: 300; height: 300px; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.12));">
+            </div>
+            <h2 style="font-size: 1.8rem; font-weight: 900; color: var(--text-dark);">Te invito</h2>
+            <p style="font-size: 1rem; color: #666; margin-top: 8px;">¡Pablito cumple 7 años!</p>
+            <div class="big-play-btn" id="btnStart">▶</div>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 18px;">Toca para abrir la tarjeta</p>
+        </div>
+
+    </div>
+
+    <script>
+        const SCENE_DURATIONS = [7000, 7000, 7000, 7000];
+        const TOTAL_SCENES = 4;
+
+        let currentScene = 0;
+        let sceneTimer = null;
+        let progressInterval = null;
+        let sceneStartTime = 0;
+        let isPaused = false;
+        let audioMuted = false;
+
+        let isAudioPlaying = false;
+
+        // Audio Setup with capibara_notificacion.mp3
+        const bgMusic = new Audio('capibara_notificacion.mp3');
+        bgMusic.loop = true;
+
+        function startAudio() {
+            if (audioMuted) return;
+            bgMusic.play().then(() => {
+                isAudioPlaying = true;
+            }).catch((err) => {
+                console.log('Audio playback waiting for user gesture or error:', err);
+            });
+        }
+
+        function stopAudio() {
+            bgMusic.pause();
+            isAudioPlaying = false;
+        }
+
+        // Particle System for Confetti
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class ConfettiParticle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = -20;
+                this.size = Math.random() * 8 + 4;
+                this.color = ['#F43F5E', '#FDE047', '#3B82F6', '#22C55E', '#FDA4AF'][Math.floor(Math.random() * 5)];
+                this.vy = Math.random() * 2 + 1.5;
+                this.vx = Math.random() * 2 - 1;
+                this.rotation = Math.random() * 360;
+                this.vRot = Math.random() * 4 - 2;
+            }
+            update() {
+                this.y += this.vy;
+                this.x += this.vx;
+                this.rotation += this.vRot;
+                if (this.y > canvas.height + 20) {
+                    this.reset();
+                }
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate((this.rotation * Math.PI) / 180);
+                ctx.fillStyle = this.color;
+                ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < 45; i++) {
+            particles.push(new ConfettiParticle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // Story Scene Logic
+        function showScene(index) {
+            currentScene = index;
+            document.querySelectorAll('.scene').forEach((sc, idx) => {
+                sc.classList.toggle('active', idx === index);
+            });
+
+            for (let i = 0; i < TOTAL_SCENES; i++) {
+                const fill = document.getElementById(`pfill-${i}`);
+                if (i < index) {
+                    fill.style.width = '100%';
+                } else if (i > index) {
+                    fill.style.width = '0%';
+                }
+            }
+
+            startSceneTimer();
+        }
+
+        function startSceneTimer() {
+            if (sceneTimer) clearTimeout(sceneTimer);
+            if (progressInterval) clearInterval(progressInterval);
+
+            const duration = SCENE_DURATIONS[currentScene];
+            sceneStartTime = Date.now();
+
+            progressInterval = setInterval(() => {
+                if (isPaused) return;
+                const elapsed = Date.now() - sceneStartTime;
+                const pct = Math.min(100, (elapsed / duration) * 100);
+                const fill = document.getElementById(`pfill-${currentScene}`);
+                if (fill) fill.style.width = pct + '%';
+            }, 50);
+
+            sceneTimer = setTimeout(() => {
+                if (currentScene < TOTAL_SCENES - 1) {
+                    showScene(currentScene + 1);
+                } else {
+                    document.getElementById(`pfill-${TOTAL_SCENES - 1}`).style.width = '100%';
+                }
+            }, duration);
+        }
+
+        function nextScene() {
+            if (currentScene < TOTAL_SCENES - 1) {
+                showScene(currentScene + 1);
+            } else {
+                showScene(0);
+            }
+        }
+
+        function prevScene() {
+            if (currentScene > 0) {
+                showScene(currentScene - 1);
+            }
+        }
+
+        // Event Listeners
+        const startOverlay = document.getElementById('startOverlay');
+        const btnStart = document.getElementById('btnStart');
+        const btnAudio = document.getElementById('btnAudio');
+        const btnReplay = document.getElementById('btnReplay');
+        const tapArea = document.getElementById('tapArea');
+
+        btnStart.addEventListener('click', () => {
+            startAudio();
+            startOverlay.classList.add('hidden');
+            showScene(0);
+        });
+
+        btnAudio.addEventListener('click', (e) => {
+            e.stopPropagation();
+            audioMuted = !audioMuted;
+            document.getElementById('audioIcon').textContent = audioMuted ? '🔇' : '🔊';
+            if (!audioMuted) {
+                startAudio();
+            } else {
+                stopAudio();
+            }
+        });
+
+        btnReplay.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (!audioMuted) {
+                bgMusic.currentTime = 0;
+                startAudio();
+            }
+            showScene(0);
+        });
+
+        tapArea.addEventListener('click', (e) => {
+            const rect = tapArea.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            if (clickX > rect.width / 2) {
+                nextScene();
+            } else {
+                prevScene();
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,1135 +1,1475 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>¡Pablito cumple 7 años! 🦫🎉</title>
-    <style>
-        :root {
-            --bg-top: #E0F2FE;
-            --bg-bottom: #FFF1F2;
-            --primary-yellow: #FDE047;
-            --accent-orange: #FB923C;
-            --soft-pink: #FDA4AF;
-            --soft-green: #86EFAC;
-            --sky-blue: #7DD3FC;
-            --text-dark: #372E2B;
-            --card-bg: rgba(255, 255, 255, 0.95);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>¡Mis 18 Años! - Gabi ✦ Invitación Digital</title>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-        }
+  <!-- Fuentes Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@1,700;1,800&family=Great+Vibes&display=swap" rel="stylesheet">
 
-        body,
-        html {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: #0f172a;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+  <style>
+    /* ==========================================================================
+       1. VARIABLES GLOBALES & RESET MOBILE-FIRST
+       ========================================================================== */
+    :root {
+      --bg-dark: #0a0612;
+      --purple-deep: #1d0933;
+      --neon-fuchsia: #ec4899;
+      --neon-purple: #8b5cf6;
+      --neon-violet: #6d28d9;
+      --gold-accent: #fbbf24;
+      --gold-dark: #f59e0b;
+      --gold-light: #fef08a;
+      --text-main: #f8fafc;
+      --text-muted: #cbd5e1;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(236, 72, 153, 0.25);
+      --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+      --touch-target: 48px;
+    }
 
-        /* 9:16 Aspect Ratio Mobile Container LEX*/
-        .story-wrapper {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            max-width: calc(100vh * (9 / 16));
-            max-height: 100vh;
-            background: linear-gradient(180deg, var(--bg-top) 0%, #F0F9FF 50%, var(--bg-bottom) 100%);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            padding-top: env(safe-area-inset-top, 12px);
-            padding-bottom: env(safe-area-inset-bottom, 16px);
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-        /* Particle Overlay Canvas */
-        #particleCanvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 2;
-        }
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      overflow-x: hidden;
+      width: 100%;
+    }
 
-        /* Story Progress Bar Container */
-        .progress-bar-container {
-            position: absolute;
-            top: calc(env(safe-area-inset-top, 10px) + 8px);
-            left: 12px;
-            right: 12px;
-            display: flex;
-            gap: 6px;
-            z-index: 50;
-        }
+    body {
+      position: relative;
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+      overflow-x: hidden;
+      width: 100%;
+      background: radial-gradient(circle at 50% 15%, #2b0b4a 0%, var(--bg-dark) 75%);
+    }
 
-        .progress-bar {
-            flex: 1;
-            height: 4px;
-            background: rgba(0, 0, 0, 0.15);
-            border-radius: 4px;
-            overflow: hidden;
-        }
+    /* Ambient animated mesh background */
+    .ambient-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
 
-        .progress-fill {
-            width: 0%;
-            height: 100%;
-            background: #F43F5E;
-            border-radius: 4px;
-            transition: width 0.1s linear;
-        }
+    .gradient-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.45;
+      animation: orbFloat 10s infinite alternate ease-in-out;
+    }
 
-        /* Floating Background Balloons */
-        .balloon-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 1;
-        }
+    .orb-1 {
+      width: min(80vw, 340px);
+      height: min(80vw, 340px);
+      background: var(--neon-fuchsia);
+      top: 5%;
+      left: -10vw;
+      animation-duration: 9s;
+    }
 
-        .balloon {
-            position: absolute;
-            bottom: -100px;
-            width: 42px;
-            height: 52px;
-            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-            animation: floatUp 8s infinite cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0.85;
-        }
+    .orb-2 {
+      width: min(90vw, 400px);
+      height: min(90vw, 400px);
+      background: var(--neon-purple);
+      bottom: 5%;
+      right: -10vw;
+      animation-delay: -3s;
+      animation-duration: 11s;
+    }
 
-        .balloon::after {
-            content: "";
-            position: absolute;
-            bottom: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 14px;
-            background: rgba(0, 0, 0, 0.2);
-        }
+    .orb-3 {
+      width: min(65vw, 260px);
+      height: min(65vw, 260px);
+      background: var(--gold-accent);
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.2;
+      animation-delay: -6s;
+      animation-duration: 13s;
+    }
 
-        @keyframes floatUp {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0;
-            }
+    @keyframes orbFloat {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      50% { transform: translate(30px, 40px) scale(1.15) rotate(90deg); }
+      100% { transform: translate(-25px, -25px) scale(0.9) rotate(180deg); }
+    }
 
-            10% {
-                opacity: 0.85;
-            }
+    /* Globos Flotantes Animados */
+    .floating-balloons-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
 
-            90% {
-                opacity: 0.85;
-            }
+    .balloon {
+      position: absolute;
+      bottom: -150px;
+      opacity: 0.7;
+      animation: floatBalloon 14s infinite linear;
+      filter: drop-shadow(0 8px 15px rgba(236, 72, 153, 0.4));
+    }
 
-            100% {
-                transform: translateY(-110vh) rotate(15deg);
-                opacity: 0;
-            }
-        }
+    .balloon-1 { left: 5%; width: 45px; animation-duration: 12s; animation-delay: 0s; }
+    .balloon-2 { right: 8%; width: 55px; animation-duration: 15s; animation-delay: 3s; filter: drop-shadow(0 8px 15px rgba(251, 191, 36, 0.4)); }
+    .balloon-3 { left: 80%; width: 40px; animation-duration: 11s; animation-delay: 6s; filter: drop-shadow(0 8px 15px rgba(139, 92, 246, 0.4)); }
+    .balloon-4 { left: 18%; width: 50px; animation-duration: 16s; animation-delay: 9s; }
 
-        /* Scene Layout */
-        .scene {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            padding: 50px 20px 80px 20px;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            transform: scale(0.95);
-            z-index: 10;
-        }
+    @keyframes floatBalloon {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.75; }
+      50% { transform: translateY(-60vh) rotate(15deg) translateX(20px); }
+      90% { opacity: 0.75; }
+      100% { transform: translateY(-120vh) rotate(-15deg) translateX(-20px); opacity: 0; }
+    }
 
-        .scene.active {
-            opacity: 1;
-            visibility: visible;
-            transform: scale(1);
-        }
+    /* Canvas */
+    #particlesCanvas, #confettiCanvas, #sparkleCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    #particlesCanvas { z-index: 1; }
+    #sparkleCanvas { z-index: 2; }
+    #confettiCanvas { z-index: 999; }
 
-        /* Titles and Typography Header */
-        .title-box {
-            text-align: center;
-            margin-top: 15px;
-            z-index: 20;
-        }
+    /* Contenedor Principal Adaptativo */
+    .app-container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 1.25rem 1rem 5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3.5rem;
+    }
 
-        .badge-subtitle {
-            display: inline-block;
-            background: #FEF08A;
-            color: #854D0E;
-            font-weight: 800;
-            font-size: clamp(0.8rem, 3.5vw, 1rem);
-            padding: 6px 16px;
-            border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            animation: pulseBadge 2s infinite ease-in-out;
-        }
+    /* Secciones ocultas antes de abrir con animación staggered */
+    .main-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      flex-direction: column;
+      gap: 3.5rem;
+      width: 100%;
+    }
 
-        @keyframes pulseBadge {
+    .main-content.revealed {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-            0%,
-            100% {
-                transform: scale(1);
-            }
+    /* ==========================================================================
+       2. BOTÓN DE MÚSICA FLOTANTE (Optimizado Móvil)
+       ========================================================================== */
+    .music-toggle {
+      position: fixed;
+      bottom: 1.25rem;
+      left: 1.25rem;
+      z-index: 100;
+      width: var(--touch-target);
+      height: var(--touch-target);
+      border-radius: 50%;
+      background: rgba(10, 6, 18, 0.85);
+      border: 1.5px solid var(--neon-fuchsia);
+      box-shadow: 0 0 15px rgba(236, 72, 153, 0.4);
+      color: var(--gold-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      transition: transform 0.3s ease, opacity 0.5s ease, box-shadow 0.2s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
 
-            50% {
-                transform: scale(1.05);
-            }
-        }
+    .music-toggle.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
 
-        .main-heading {
-            font-size: clamp(1.8rem, 7.5vw, 2.3rem);
-            font-weight: 900;
-            color: var(--text-dark);
-            text-shadow: 2px 2px 0px #FFF, 4px 4px 12px rgba(0, 0, 0, 0.08);
-            line-height: 1.15;
-        }
+    .music-toggle:active {
+      transform: scale(0.92);
+    }
 
-        .number-7-wrapper {
-            display: inline-block;
-            position: relative;
-        }
+    .music-toggle svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
 
-        .number-7 {
-            font-size: clamp(3.5rem, 15vw, 4.5rem);
-            font-weight: 900;
-            color: #E11D48;
-            display: inline-block;
-            transform-origin: center;
-            animation: bounce7 1.2s infinite alternate cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            text-shadow: 3px 3px 0 #FDE047, 6px 6px 0px rgba(0, 0, 0, 0.12);
-        }
+    .music-toggle.playing {
+      animation: pulseGlow 2s infinite alternate, rotateMusic 10s infinite linear;
+    }
 
-        @keyframes bounce7 {
-            0% {
-                transform: scale(1) rotate(-5deg);
-            }
+    @keyframes rotateMusic {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
 
-            100% {
-                transform: scale(1.25) rotate(8deg);
-            }
-        }
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 10px rgba(236, 72, 153, 0.4), 0 0 20px rgba(236, 72, 153, 0.2); }
+      100% { box-shadow: 0 0 25px rgba(251, 191, 36, 0.8), 0 0 35px rgba(236, 72, 153, 0.6); }
+    }
 
-        /* SVG Vector Hero Wrapper */
-        .pablito-hero-wrapper {
-            width: clamp(280px, 85vw, 360px);
-            height: clamp(280px, 85vw, 360px);
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 15;
-            margin: auto 0;
-            filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.12));
-        }
+    /* ==========================================================================
+       3. PORTADA / HERO SCREEN (Responsive Clamp & Sparkle Animations)
+       ========================================================================== */
+    .hero-section {
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 1rem 0;
+      position: relative;
+    }
 
-        .pablito-hero-wrapper svg,
-        .pablito-hero-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
+    .badge-invite {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+      letter-spacing: 3px;
+      color: var(--gold-accent);
+      text-transform: uppercase;
+      padding: 0.45rem 1.2rem;
+      border: 1px solid rgba(251, 191, 36, 0.5);
+      border-radius: 50px;
+      background: rgba(251, 191, 36, 0.08);
+      margin-bottom: 1.2rem;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 18px rgba(251, 191, 36, 0.25);
+      animation: fadeInDown 0.8s ease-out, badgeGlow 3s infinite alternate ease-in-out;
+    }
 
-        /* Image Animations */
-        .anim-bounce {
-            animation: floatBounce 1.4s infinite alternate ease-in-out;
-        }
+    @keyframes badgeGlow {
+      0% { box-shadow: 0 0 10px rgba(251, 191, 36, 0.2); border-color: rgba(251, 191, 36, 0.4); }
+      100% { box-shadow: 0 0 22px rgba(236, 72, 153, 0.6); border-color: rgba(236, 72, 153, 0.8); color: #fff; }
+    }
 
-        @keyframes floatBounce {
-            0% {
-                transform: translateY(0) scale(1);
-            }
+    .hero-title-wrapper {
+      position: relative;
+      display: inline-block;
+    }
 
-            100% {
-                transform: translateY(-14px) scale(1.02);
-            }
-        }
+    .sparkle-icon {
+      position: absolute;
+      color: var(--gold-accent);
+      animation: sparkleSpin 4s infinite ease-in-out;
+      pointer-events: none;
+    }
 
-        .anim-wiggle {
-            animation: happyWiggle 1.4s infinite ease-in-out;
-        }
+    .sparkle-1 { top: -10px; right: -20px; font-size: 1.4rem; animation-delay: 0s; }
+    .sparkle-2 { bottom: 10px; left: -25px; font-size: 1.2rem; animation-delay: 2s; color: var(--neon-fuchsia); }
 
-        @keyframes happyWiggle {
+    @keyframes sparkleSpin {
+      0% { transform: scale(0.6) rotate(0deg); opacity: 0.3; }
+      50% { transform: scale(1.2) rotate(180deg); opacity: 1; filter: drop-shadow(0 0 10px currentColor); }
+      100% { transform: scale(0.6) rotate(360deg); opacity: 0.3; }
+    }
 
-            0%,
-            100% {
-                transform: rotate(0deg) scale(1);
-            }
+    .hero-title-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.2rem, 14vw, 5rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 3px;
+      background: linear-gradient(135deg, #ffffff 0%, #f472b6 40%, var(--neon-fuchsia) 80%, var(--gold-accent) 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(236, 72, 153, 0.4);
+      margin-bottom: 0.2rem;
+      animation: zoomIn 1s ease-out, textGradientShift 5s infinite linear;
+    }
 
-            25% {
-                transform: rotate(-3deg) scale(1.03);
-            }
+    @keyframes textGradientShift {
+      0% { background-position: 0% center; }
+      50% { background-position: 100% center; }
+      100% { background-position: 0% center; }
+    }
 
-            75% {
-                transform: rotate(3deg) scale(1.03);
-            }
-        }
+    .number-18-container {
+      position: relative;
+      margin: 0.5rem 0;
+      display: inline-block;
+    }
 
-        /* Candle Flame Flicker Animation */
-        .candle-flame {
-            transform-origin: center bottom;
-            animation: flameFlicker 0.6s infinite alternate ease-in-out;
-        }
+    .number-18 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(6.5rem, 28vw, 10rem);
+      font-weight: 900;
+      line-height: 0.85;
+      background: linear-gradient(135deg, #fffbeb 0%, #fbbf24 25%, #f59e0b 50%, #fef08a 75%, #b45309 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 25px rgba(251, 191, 36, 0.7));
+      animation: metallicShimmer 3.5s linear infinite, floatSlow 3s ease-in-out infinite alternate;
+    }
 
-        @keyframes flameFlicker {
-            0% {
-                transform: scale(1) rotate(-3deg);
-                opacity: 0.95;
-            }
+    .number-glow-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120%;
+      height: 120%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(236, 72, 153, 0.25) 0%, rgba(139, 92, 246, 0.15) 50%, transparent 70%);
+      z-index: -1;
+      animation: ringPulse 3s infinite alternate ease-in-out;
+    }
 
-            100% {
-                transform: scale(1.15) rotate(4deg);
-                opacity: 1;
-            }
-        }
+    @keyframes ringPulse {
+      0% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.4; }
+      100% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.9; }
+    }
 
-        /* Event Info Card Component */
-        .info-card {
-            background: var(--card-bg);
-            border: 3px solid #FFF;
-            border-radius: 24px;
-            padding: 20px 22px;
-            width: 100%;
-            box-shadow: 0 15px 35px rgba(90, 130, 140, 0.12);
-            backdrop-filter: blur(8px);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            z-index: 20;
-        }
+    @keyframes metallicShimmer {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
 
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 10px 14px;
-            background: rgba(255, 255, 255, 0.85);
-            border-radius: 16px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-            transform: translateY(15px);
-            opacity: 0;
-            animation: slideUpItem 0.5s forwards ease-out;
-        }
+    @keyframes floatSlow {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(1deg); }
+      100% { transform: translateY(-14px) rotate(-1deg); }
+    }
 
-        .scene.active .info-item:nth-child(1) {
-            animation-delay: 0.2s;
-        }
+    .hero-subtitle {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.2rem, 8vw, 3.2rem);
+      color: var(--neon-fuchsia);
+      text-shadow: 0 0 15px rgba(236, 72, 153, 0.6);
+      margin-top: -0.5rem;
+      margin-bottom: 1.2rem;
+      animation: floatSlow 4s infinite alternate ease-in-out 1s;
+    }
 
-        .scene.active .info-item:nth-child(2) {
-            animation-delay: 0.4s;
-        }
+    .hero-message {
+      font-size: clamp(0.9rem, 3.5vw, 1.05rem);
+      line-height: 1.6;
+      color: var(--text-muted);
+      max-width: 440px;
+      margin: 0 auto 2rem auto;
+      font-weight: 300;
+      padding: 0 0.5rem;
+    }
 
-        .scene.active .info-item:nth-child(3) {
-            animation-delay: 0.6s;
-        }
+    /* Botón Neón Principal (Touch Target Amplio & Ripple FX) */
+    .btn-neon {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      min-height: var(--touch-target);
+      padding: 0.95rem 2.2rem;
+      font-size: clamp(0.85rem, 3.2vw, 0.95rem);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fff;
+      background: linear-gradient(135deg, var(--neon-purple), var(--neon-fuchsia));
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 25px rgba(236, 72, 153, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.4);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      text-decoration: none;
+      width: min(100%, 310px);
+      overflow: hidden;
+    }
 
-        .scene.active .info-item:nth-child(4) {
-            animation-delay: 0.8s;
-        }
+    .btn-neon::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(60deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: rotate(30deg);
+      animation: btnShimmer 3s infinite linear;
+    }
 
-        @keyframes slideUpItem {
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
+    @keyframes btnShimmer {
+      0% { transform: translateX(-100%) rotate(30deg); }
+      100% { transform: translateX(100%) rotate(30deg); }
+    }
 
-        .info-icon {
-            font-size: 1.8rem;
-            width: 44px;
-            height: 44px;
-            background: #FFF;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-            flex-shrink: 0;
-        }
+    .btn-neon:active {
+      transform: scale(0.95);
+      box-shadow: 0 0 35px rgba(236, 72, 153, 0.9);
+    }
 
-        .info-text-group {
-            display: flex;
-            flex-direction: column;
-        }
+    /* ==========================================================================
+       4. SECCIÓN DETALLES DEL EVENTO
+       ========================================================================== */
+    .section-header {
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
 
-        .info-label {
-            font-size: 0.75rem;
-            color: #78716C;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.3rem, 5vw, 1.7rem);
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #fff;
+      text-transform: uppercase;
+      position: relative;
+      display: inline-block;
+    }
 
-        .info-val {
-            font-size: clamp(1rem, 4vw, 1.15rem);
-            font-weight: 800;
-            color: var(--text-dark);
-        }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 70%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold-accent), var(--neon-fuchsia), transparent);
+      margin: 0.5rem auto 0 auto;
+      animation: linePulse 2s infinite alternate;
+    }
 
-        /* Controls Overlay */
-        .controls-overlay {
-            position: absolute;
-            bottom: calc(env(safe-area-inset-bottom, 16px) + 12px);
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            padding: 0 16px;
-            z-index: 100;
-        }
+    @keyframes linePulse {
+      0% { width: 40%; opacity: 0.5; }
+      100% { width: 80%; opacity: 1; }
+    }
 
-        .btn-action {
-            background: #FFF;
-            color: var(--text-dark);
-            border: 2px solid rgba(0, 0, 0, 0.08);
-            padding: 10px 18px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            outline: none;
-        }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      width: 100%;
+    }
 
-        .btn-action:active {
-            transform: scale(0.92);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
+    @media (max-width: 480px) {
+      .cards-grid {
+        gap: 0.5rem;
+      }
+    }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #F43F5E 0%, #FB923C 100%);
-            color: #FFF;
-            border: none;
-            padding: 12px 22px;
-            font-size: 0.95rem;
-            box-shadow: 0 6px 20px rgba(244, 63, 94, 0.4);
-        }
+    .info-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      padding: 1.25rem 0.6rem;
+      text-align: center;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--glass-shadow);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
+      transform-style: preserve-3d;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-        /* Tap Gesture Layer */
-        .tap-area {
-            position: absolute;
-            inset: 0;
-            z-index: 5;
-        }
+    .info-card:active {
+      transform: scale(0.98) translateY(-2px);
+      box-shadow: 0 10px 30px rgba(236, 72, 153, 0.3);
+      border-color: var(--neon-fuchsia);
+    }
 
-        /* Initial Start Screen Overlay */
-        .start-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(224, 242, 254, 0.98), rgba(255, 241, 242, 0.98));
-            z-index: 200;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 30px;
-            text-align: center;
-            transition: opacity 0.5s ease;
-        }
+    .info-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--neon-fuchsia), var(--gold-accent), transparent);
+      transition: left 0.7s ease;
+      animation: cardBorderScan 4s infinite linear;
+    }
 
-        .start-overlay.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
+    @keyframes cardBorderScan {
+      0% { left: -100%; }
+      50%, 100% { left: 100%; }
+    }
 
-        .big-play-btn {
-            width: 86px;
-            height: 86px;
-            background: linear-gradient(135deg, #F43F5E, #FDA4AF);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 2.2rem;
-            box-shadow: 0 10px 25px rgba(244, 63, 94, 0.4);
-            margin-top: 24px;
-            cursor: pointer;
-            animation: pulsePlay 1.5s infinite;
-        }
+    .card-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 0.8rem auto;
+      border-radius: 50%;
+      background: rgba(236, 72, 153, 0.12);
+      border: 1px solid rgba(236, 72, 153, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-accent);
+      box-shadow: 0 0 15px rgba(236, 72, 153, 0.2);
+      animation: iconFloat 3s ease-in-out infinite alternate;
+    }
 
-        @keyframes pulsePlay {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.6);
-            }
+    .info-card:nth-child(2) .card-icon { animation-delay: -1s; }
+    .info-card:nth-child(3) .card-icon { animation-delay: -2s; }
 
-            70% {
-                transform: scale(1.1);
-                box-shadow: 0 0 0 20px rgba(244, 63, 94, 0);
-            }
+    @keyframes iconFloat {
+      0% { transform: translateY(0); box-shadow: 0 0 10px rgba(236, 72, 153, 0.2); }
+      100% { transform: translateY(-6px); box-shadow: 0 0 20px rgba(251, 191, 36, 0.5); color: #fff; }
+    }
 
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(244, 63, 94, 0);
-            }
-        }
-    </style>
+    .card-icon svg {
+      width: 26px;
+      height: 26px;
+      fill: currentColor;
+    }
+
+    .card-label {
+      font-size: clamp(0.65rem, 2.2vw, 0.75rem);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .card-value {
+      font-size: clamp(0.95rem, 3.2vw, 1.25rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      white-space: nowrap;
+    }
+
+    .btn-card-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      min-height: 34px;
+      padding: 0.35rem 0.75rem;
+      font-size: clamp(0.68rem, 2.2vw, 0.8rem);
+      font-weight: 600;
+      color: var(--gold-accent);
+      background: rgba(251, 191, 36, 0.1);
+      border: 1px solid rgba(251, 191, 36, 0.4);
+      border-radius: 20px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      width: 100%;
+      white-space: nowrap;
+    }
+
+    .btn-card-action:active {
+      background: rgba(251, 191, 36, 0.3);
+      box-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
+    }
+
+    /* ==========================================================================
+       5. SOBRE VIRTUAL 3D (Optimizado para Touch Screen + FX)
+       ========================================================================== */
+    .envelope-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .envelope-intro {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .envelope-wrapper {
+      position: relative;
+      width: min(100%, 320px);
+      height: 210px;
+      perspective: 1000px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .envelope-wrapper:active {
+      transform: scale(0.98);
+    }
+
+    .envelope-body {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #1a082b;
+      border-radius: 14px;
+      border: 1px solid rgba(236, 72, 153, 0.4);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(139, 92, 246, 0.3);
+    }
+
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: min(42.5vw, 160px) solid transparent;
+      border-right: min(42.5vw, 160px) solid transparent;
+      border-top: 110px solid #2a0c45;
+      transform-origin: top;
+      transition: transform 0.6s ease-in-out;
+      z-index: 5;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+    }
+
+    .envelope-seal {
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: var(--touch-target);
+      height: var(--touch-target);
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      border: 2px solid #fef08a;
+      box-shadow: 0 0 20px rgba(251, 191, 36, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 6;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      animation: sealPulse 2s infinite alternate ease-in-out;
+    }
+
+    @keyframes sealPulse {
+      0% { transform: translateX(-50%) scale(1); box-shadow: 0 0 15px rgba(251, 191, 36, 0.6); }
+      100% { transform: translateX(-50%) scale(1.1); box-shadow: 0 0 28px rgba(251, 191, 36, 0.9); }
+    }
+
+    .envelope-seal svg {
+      width: 24px;
+      height: 24px;
+      fill: #0a0612;
+    }
+
+    .envelope-card {
+      position: absolute;
+      bottom: 10px;
+      left: 5%;
+      width: 90%;
+      height: 180px;
+      background: linear-gradient(135deg, #2a113b, #150721);
+      border: 1px solid var(--gold-accent);
+      border-radius: 12px;
+      padding: 1.25rem 1rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 3;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+
+    .card-text {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .btn-gift-small {
+      min-height: var(--touch-target);
+      padding: 0.6rem 1.5rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: 25px;
+      background: linear-gradient(135deg, var(--gold-accent), var(--gold-dark));
+      color: #0a0612;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      width: 100%;
+    }
+
+    .btn-gift-small:active {
+      transform: scale(0.95);
+      box-shadow: 0 0 25px rgba(251, 191, 36, 0.9);
+    }
+
+    /* Estado Abierto */
+    .envelope-wrapper.open .envelope-flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    .envelope-wrapper.open .envelope-seal {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .envelope-wrapper.open .envelope-card {
+      transform: translateY(-105px);
+      z-index: 4;
+    }
+
+    /* ==========================================================================
+       6. MODAL DATOS BANCARIOS (100% Mobile Friendly)
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(10, 6, 18, 0.88);
+      backdrop-filter: blur(12px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      background: #170926;
+      border: 1px solid var(--neon-fuchsia);
+      border-radius: 22px;
+      padding: 1.75rem 1.25rem;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 0 40px rgba(236, 72, 153, 0.35);
+      text-align: center;
+      position: relative;
+      transform: scale(0.85);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      width: var(--touch-target);
+      height: var(--touch-target);
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      color: var(--gold-accent);
+      margin-bottom: 1.25rem;
+      padding-right: 1.5rem;
+    }
+
+    .bank-details-list {
+      text-align: left;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 14px;
+      padding: 1rem;
+      margin-bottom: 1.2rem;
+      font-size: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .bank-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+      padding-bottom: 0.4rem;
+    }
+
+    .bank-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .bank-label {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .bank-val {
+      font-weight: 600;
+      color: #fff;
+      word-break: break-all;
+    }
+
+    .copy-feedback {
+      font-size: 0.8rem;
+      color: var(--neon-fuchsia);
+      margin-top: 0.5rem;
+      min-height: 1.2em;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .copy-feedback.show {
+      opacity: 1;
+    }
+
+    /* ==========================================================================
+       7. FOOTER Y MENSAJE FINAL
+       ========================================================================== */
+    .footer-section {
+      text-align: center;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 22px;
+      padding: 2.2rem 1.25rem;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--glass-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-quote {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2rem, 7vw, 2.5rem);
+      color: var(--gold-accent);
+      margin-bottom: 0.8rem;
+      text-shadow: 0 0 12px rgba(251, 191, 36, 0.5);
+      animation: floatSlow 3.5s infinite alternate ease-in-out;
+    }
+
+    .footer-sub {
+      font-size: clamp(0.9rem, 3.2vw, 1rem);
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .footer-signature {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 5vw, 1.8rem);
+      font-weight: 700;
+      color: var(--neon-fuchsia);
+      letter-spacing: 2px;
+      display: inline-block;
+      animation: heartPulse 1.8s infinite ease-in-out;
+    }
+
+    @keyframes heartPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.06); text-shadow: 0 0 20px rgba(236, 72, 153, 0.8); }
+      100% { transform: scale(1); }
+    }
+
+    /* ==========================================================================
+       8. ANIMACIONES Y ACCESIBILIDAD
+       ========================================================================== */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.85); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .gradient-orb, .number-18, .balloon, .hero-title-name, .music-toggle {
+        animation: none !important;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-    <div class="story-wrapper">
+<!-- Fondo Ambient Responsorial -->
+<div class="ambient-bg">
+  <div class="gradient-orb orb-1"></div>
+  <div class="gradient-orb orb-2"></div>
+  <div class="gradient-orb orb-3"></div>
+</div>
 
-        <!-- Particle Overlay Canvas -->
-        <canvas id="particleCanvas"></canvas>
+<!-- Globos Flotantes en Fondo -->
+<div class="floating-balloons-container">
+  <!-- SVG Balloon 1 -->
+  <svg class="balloon balloon-1" viewBox="0 0 50 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="25" cy="28" rx="20" ry="25" fill="url(#balloonGrad1)"/>
+    <path d="M25 53 L22 57 L28 57 Z" fill="#ec4899"/>
+    <path d="M25 57 Q28 64 22 70" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" fill="none"/>
+    <defs>
+      <radialGradient id="balloonGrad1" cx="35%" cy="30%" r="65%">
+        <stop offset="0%" stop-color="#f472b6"/>
+        <stop offset="100%" stop-color="#be185d"/>
+      </radialGradient>
+    </defs>
+  </svg>
+  <!-- SVG Balloon 2 -->
+  <svg class="balloon balloon-2" viewBox="0 0 50 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="25" cy="28" rx="20" ry="25" fill="url(#balloonGrad2)"/>
+    <path d="M25 53 L22 57 L28 57 Z" fill="#fbbf24"/>
+    <path d="M25 57 Q20 63 26 70" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" fill="none"/>
+    <defs>
+      <radialGradient id="balloonGrad2" cx="35%" cy="30%" r="65%">
+        <stop offset="0%" stop-color="#fef08a"/>
+        <stop offset="100%" stop-color="#d97706"/>
+      </radialGradient>
+    </defs>
+  </svg>
+  <!-- SVG Balloon 3 -->
+  <svg class="balloon balloon-3" viewBox="0 0 50 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="25" cy="28" rx="20" ry="25" fill="url(#balloonGrad3)"/>
+    <path d="M25 53 L22 57 L28 57 Z" fill="#8b5cf6"/>
+    <path d="M25 57 Q27 62 23 70" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" fill="none"/>
+    <defs>
+      <radialGradient id="balloonGrad3" cx="35%" cy="30%" r="65%">
+        <stop offset="0%" stop-color="#c084fc"/>
+        <stop offset="100%" stop-color="#6d28d9"/>
+      </radialGradient>
+    </defs>
+  </svg>
+  <!-- SVG Balloon 4 -->
+  <svg class="balloon balloon-4" viewBox="0 0 50 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="25" cy="28" rx="20" ry="25" fill="url(#balloonGrad1)"/>
+    <path d="M25 53 L22 57 L28 57 Z" fill="#ec4899"/>
+    <path d="M25 57 Q23 63 27 70" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" fill="none"/>
+  </svg>
+</div>
 
-        <!-- Progress Indicators -->
-        <div class="progress-bar-container">
-            <div class="progress-bar">
-                <div class="progress-fill" id="pfill-0"></div>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="pfill-1"></div>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="pfill-2"></div>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="pfill-3"></div>
-            </div>
-        </div>
+<!-- Canvas para EFECTOS (Partículas, Confeti y Chispas al tocar) -->
+<canvas id="particlesCanvas"></canvas>
+<canvas id="sparkleCanvas"></canvas>
+<canvas id="confettiCanvas"></canvas>
 
-        <!-- Floating Background Balloons -->
-        <div class="balloon-container">
-            <div class="balloon" style="left: 10%; background: #FDA4AF; animation-delay: 0s;"></div>
-            <div class="balloon" style="left: 30%; background: #93C5FD; animation-delay: 2s;"></div>
-            <div class="balloon" style="left: 65%; background: #FDE047; animation-delay: 4s;"></div>
-            <div class="balloon" style="left: 85%; background: #86EFAC; animation-delay: 1s;"></div>
-        </div>
+<!-- Control de Música Flotante Accesible -->
+<button class="music-toggle" id="musicBtn" aria-label="Activar o desactivar música">
+  <svg id="musicIconOff" viewBox="0 0 24 24">
+    <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73 4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+  </svg>
+  <svg id="musicIconOn" viewBox="0 0 24 24" style="display: none;">
+    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+  </svg>
+</button>
+<audio id="bgAudio" loop preload="auto">
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
 
-        <!-- Touch Tap Navigation Layer -->
-        <div class="tap-area" id="tapArea"></div>
+<!-- Contenedor Principal Mobile-First -->
+<main class="app-container">
 
-        <!-- SVG Template for Pablito and Birthday Cake -->
-        <svg style="display: none;">
-            <g id="pablito-illustration">
-                <defs>
-                    <filter id="soft-shadow" x="-10%" y="-10%" width="120%" height="120%">
-                        <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#8a5a36" flood-opacity="0.08" />
-                    </filter>
-                    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                        <feGaussianBlur stdDeviation="3" result="blur" />
-                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                    </filter>
-                </defs>
-
-                <g id="background-decorations">
-                    <polygon points="250,290 254,300 265,300 256,307 259,317 250,310 241,317 244,307 235,300 246,300"
-                        fill="#fcd34d" />
-                    <polygon points="630,590 633,598 642,598 635,603 637,611 630,606 623,611 625,603 618,598 627,598"
-                        fill="#fcd34d" />
-                    <polygon points="180,650 183,656 190,656 185,660 187,666 180,662 173,666 175,660 170,656 177,656"
-                        fill="#86efac" />
-
-                    <rect x="190" y="450" width="12" height="6" rx="2" fill="#f472b6" transform="rotate(25 190 450)" />
-                    <rect x="620" y="450" width="14" height="7" rx="2" fill="#38bdf8" transform="rotate(-35 620 450)" />
-                    <rect x="140" y="400" width="10" height="10" rx="2" fill="#fcd34d" transform="rotate(12 140 400)" />
-                    <circle cx="145" cy="410" r="6" fill="#a7f3d0" />
-                    <circle cx="670" cy="415" r="7" fill="#fde68a" />
-                    <circle cx="685" cy="505" r="5" fill="#f472b6" />
-
-                    <path d="M 350 270 A 8 8 0 0 1 364 270 A 8 8 0 0 1 378 270 Q 378 285 364 295 Q 350 285 350 270 Z"
-                        fill="#f472b6" opacity="0.8" />
-                    <path
-                        d="M 150 580 A 10 10 0 0 1 168 580 A 10 10 0 0 1 186 580 Q 186 600 168 612 Q 150 600 150 580 Z"
-                        fill="#f472b6" opacity="0.8" transform="rotate(-15 168 590)" />
-                    <path d="M 660 515 A 8 8 0 0 1 674 515 A 8 8 0 0 1 688 515 Q 688 530 674 540 Q 660 530 660 515 Z"
-                        fill="#f472b6" opacity="0.8" transform="rotate(15 674 525)" />
-                </g>
-
-                <g id="garland">
-                    <path d="M 220 100 Q 400 230 580 100" fill="none" stroke="#5c3d2e" stroke-width="3.5"
-                        stroke-dasharray="6,3" />
-
-                    <g transform="translate(230, 115) rotate(12)">
-                        <polygon points="0,0 36,0 18,48" fill="#fca5a5" stroke="#5c3d2e" stroke-width="3"
-                            stroke-linejoin="round" />
-                        <text x="18" y="24" font-size="16" font-weight="bold" fill="#5c3d2e" text-anchor="middle"
-                            dominant-baseline="middle">7th</text>
-                    </g>
-                    <g transform="translate(270, 133) rotate(8)">
-                        <polygon points="0,0 34,0 17,46" fill="#fef08a" stroke="#5c3d2e" stroke-width="3"
-                            stroke-linejoin="round" />
-                        <text x="17" y="23" font-size="20" font-weight="bold" fill="#5c3d2e" text-anchor="middle"
-                            dominant-baseline="middle">B</text>
-                    </g>
-                    <g transform="translate(308, 146) rotate(5)">
-                        <polygon points="0,0 34,0 17,46" fill="#bbf7d0" stroke="#5c3d2e" stroke-width="3"
-                            stroke-linejoin="round" />
-                        <text x="17" y="23" font-size="20" font-weight="bold" fill="#5c3d2e" text-anchor="middle"
-                            dominant-baseline="middle">I</text>
-                    </g>
-                    <g transform="translate(346, 154) rotate(1)">
-                        <polygon points="0,0 34,0 17,46" fill="#fed7aa" stroke="#5c3d2e" stroke-width="3"
-                            stroke-linejoin="round" />
-                        <text x="17" y="23" font-size="20" font-weight="bold" fill="#5c3d2e" text-anchor="middle"
-                            dominant-baseline="middle">R</text>
-                    </g>
-                    <g transform="translate(384, 155) rotate(-1)">
-                        <polygon points="0,0 34,0 17,46" fill="#bae6fd" stroke="#5c3d2e" stroke-width="3"
-                            stroke-linejoin="round" />
-                        <text x="17" y="23" font-size="20" font-weight="bold" fill="#5c3d2e" text-anchor="middle"
-                            dominant-baseline="middle">T</text>
-                    </g>
-                    <g transform="translate(422, 152) rotate(-4)">
-                        <polygon points="0,0 34,0 17,46" fill="#ddd6fe" stroke="#5c3d2e" stroke-width="3"
-                            stroke-linejoin="round" />
-                        <text x="17" y="23" font-size="20" font-weight="bold" fill="#5c3d2e" text-anchor="middle"
-                            dominant-baseline="middle">H</text>
-                    </g>
-                    <g transform="translate(460, 144) rotate(-7)">
-                        <polygon points="0,0 34,0 17,46" fill="#fbcfe8" stroke="#5c3d2e" stroke-width="3"
-                            stroke-linejoin="round" />
-                        <text x="17" y="23" font-size="20" font-weight="bold" fill="#5c3d2e" text-anchor="middle"
-                            dominant-baseline="middle">D</text>
-                    </g>
-                    <g transform="translate(498, 131) rotate(-10)">
-                        <polygon points="0,0 34,0 17,46" fill="#fef08a" stroke="#5c3d2e" stroke-width="3"
-                            stroke-linejoin="round" />
-                        <text x="17" y="23" font-size="20" font-weight="bold" fill="#5c3d2e" text-anchor="middle"
-                            dominant-baseline="middle">A</text>
-                    </g>
-                    <g transform="translate(536, 113) rotate(-14)">
-                        <polygon points="0,0 36,0 18,48" fill="#bbf7d0" stroke="#5c3d2e" stroke-width="3"
-                            stroke-linejoin="round" />
-                        <text x="18" y="24" font-size="18" font-weight="bold" fill="#5c3d2e" text-anchor="middle"
-                            dominant-baseline="middle">Y!</text>
-                    </g>
-                </g>
-
-                <g id="left-balloons" class="balloon-left interactive-element">
-                    <path d="M 145 280 Q 160 340 180 410" fill="none" stroke="#5c3d2e" stroke-width="2.5" />
-                    <path d="M 185 235 Q 195 310 195 330" fill="none" stroke="#5c3d2e" stroke-width="2.5" />
-
-                    <g transform="translate(145, 280) rotate(-15)">
-                        <ellipse cx="0" cy="0" rx="36" ry="44" fill="#fde047" stroke="#5c3d2e" stroke-width="3.5" />
-                        <polygon points="-4,44 4,44 0,49" fill="#fde047" stroke="#5c3d2e" stroke-width="3" />
-                        <path d="M -15 -20 A 20 25 0 0 1 -5 -35" fill="none" stroke="#ffffff" stroke-width="4"
-                            stroke-linecap="round" opacity="0.7" />
-                        <polygon points="0,-5 3,3 10,3 4,7 6,14 0,10 -6,14 -4,7 -10,3 -3,3" fill="#67e8f9"
-                            opacity="0.9" />
-                    </g>
-
-                    <g transform="translate(185, 230) rotate(5)">
-                        <ellipse cx="0" cy="0" rx="42" ry="52" fill="#a7f3d0" stroke="#5c3d2e" stroke-width="3.5" />
-                        <polygon points="-5,52 5,52 0,58" fill="#a7f3d0" stroke="#5c3d2e" stroke-width="3" />
-                        <path d="M -18 -25 A 25 30 0 0 1 -5 -42" fill="none" stroke="#ffffff" stroke-width="4.5"
-                            stroke-linecap="round" opacity="0.7" />
-                        <polygon points="0,-5 4,4 12,4 5,9 8,17 0,12 -8,17 -5,9 -12,4 -4,4" fill="#f472b6"
-                            opacity="0.8" />
-                    </g>
-                </g>
-
-                <g id="right-balloons" class="balloon-right interactive-element">
-                    <path d="M 615 280 Q 610 350 595 405" fill="none" stroke="#5c3d2e" stroke-width="2.5" />
-                    <path d="M 660 305 Q 640 370 605 440" fill="none" stroke="#5c3d2e" stroke-width="2.5" />
-
-                    <g transform="translate(620, 235) rotate(12)">
-                        <ellipse cx="0" cy="0" rx="43" ry="52" fill="#fbcfe8" stroke="#5c3d2e" stroke-width="3.5" />
-                        <polygon points="-5,52 5,52 0,58" fill="#fbcfe8" stroke="#5c3d2e" stroke-width="3" />
-                        <path d="M -18 -25 A 25 30 0 0 1 -5 -42" fill="none" stroke="#ffffff" stroke-width="4.5"
-                            stroke-linecap="round" opacity="0.7" />
-                        <polygon points="0,-5 4,4 12,4 5,9 8,17 0,12 -8,17 -5,9 -12,4 -4,4" fill="#fde047"
-                            opacity="0.9" />
-                    </g>
-
-                    <g transform="translate(660, 305) rotate(20)">
-                        <ellipse cx="0" cy="0" rx="38" ry="46" fill="#bae6fd" stroke="#5c3d2e" stroke-width="3.5" />
-                        <polygon points="-4,46 4,46 0,52" fill="#bae6fd" stroke="#5c3d2e" stroke-width="3" />
-                        <path d="M -15 -20 A 20 25 0 0 1 -5 -36" fill="none" stroke="#ffffff" stroke-width="4"
-                            stroke-linecap="round" opacity="0.7" />
-                        <polygon points="0,-4 3,3 9,3 4,7 6,13 0,9 -6,13 -4,7 -9,3 -3,3" fill="#f472b6" opacity="0.9" />
-                    </g>
-                </g>
-
-                <g id="capybara" class="interactive-element">
-                    <path
-                        d="M 370 480 C 330 400, 420 300, 520 300 C 620 300, 650 370, 640 450 C 660 500, 660 620, 640 680 C 620 740, 530 750, 450 740 C 390 730, 350 680, 360 600 Z"
-                        fill="#d99b66" stroke="#5c3d2e" stroke-width="4.5" stroke-linejoin="round" />
-                    <path
-                        d="M 430 550 C 410 600, 420 680, 470 700 C 540 730, 590 680, 570 600 C 550 540, 460 510, 430 550 Z"
-                        fill="#fbeada" opacity="0.9" />
-
-                    <!-- Arms -->
-                    <path d="M 405 525 C 370 510, 315 540, 320 575 C 325 595, 355 580, 395 565 Z" fill="#d99b66"
-                        stroke="#5c3d2e" stroke-width="4.5" stroke-linejoin="round" />
-                    <path d="M 315 550 C 310 555, 312 565, 320 565" stroke="#5c3d2e" stroke-width="3" fill="none" />
-                    <path d="M 312 563 C 308 570, 312 576, 322 573" stroke="#5c3d2e" stroke-width="3" fill="none" />
-
-                    <path d="M 605 525 C 645 510, 695 520, 700 555 C 705 580, 670 585, 615 560 Z" fill="#d99b66"
-                        stroke="#5c3d2e" stroke-width="4.5" stroke-linejoin="round" />
-                    <path d="M 692 532 C 702 535, 705 545, 698 552" stroke="#5c3d2e" stroke-width="3" fill="none" />
-                    <path d="M 698 548 C 707 553, 705 563, 693 565" stroke="#5c3d2e" stroke-width="3" fill="none" />
-
-                    <!-- Feet -->
-                    <path d="M 480 710 C 470 730, 465 760, 485 765 C 505 770, 520 745, 510 715 Z" fill="#b07343"
-                        stroke="#5c3d2e" stroke-width="4" />
-                    <path d="M 525 700 C 530 735, 535 770, 560 765 C 585 760, 575 725, 555 695 Z" fill="#b07343"
-                        stroke="#5c3d2e" stroke-width="4" />
-
-                    <!-- Ears -->
-                    <path d="M 435 330 C 420 310, 430 285, 450 300 C 460 310, 455 335, 435 330 Z" fill="#b07343"
-                        stroke="#5c3d2e" stroke-width="4" />
-                    <path d="M 438 318 C 430 310, 435 298, 446 307" fill="#f87171" opacity="0.4" />
-                    <path d="M 590 345 C 610 330, 625 350, 610 365 C 595 380, 585 360, 590 345 Z" fill="#b07343"
-                        stroke="#5c3d2e" stroke-width="4" />
-
-                    <!-- Snout & Face -->
-                    <path d="M 445 440 C 445 390, 545 390, 545 440 C 545 480, 445 480, 445 440 Z" fill="#b07343"
-                        stroke="#5c3d2e" stroke-width="4" />
-                    <path
-                        d="M 470 415 C 470 405, 520 405, 520 415 C 520 435, 495 440, 495 440 C 495 440, 470 435, 470 415 Z"
-                        fill="#5c3d2e" />
-                    <line x1="495" y1="435" x2="495" y2="455" stroke="#5c3d2e" stroke-width="4"
-                        stroke-linecap="round" />
-
-                    <!-- Smile -->
-                    <path d="M 475 460 Q 495 480 515 460" fill="none" stroke="#5c3d2e" stroke-width="4"
-                        stroke-linecap="round" />
-                    <path d="M 483 468 Q 495 488 507 468 Z" fill="#f87171" />
-
-                    <!-- Cheeks -->
-                    <ellipse cx="430" cy="450" rx="18" ry="12" fill="#f472b6" opacity="0.5" />
-                    <ellipse cx="560" cy="460" rx="18" ry="12" fill="#f472b6" opacity="0.5" />
-
-                    <!-- Eyes -->
-                    <circle cx="430" cy="405" r="14" fill="#2d1a10" />
-                    <circle cx="426" cy="400" r="5" fill="#ffffff" />
-                    <circle cx="433" cy="410" r="2" fill="#ffffff" />
-
-                    <circle cx="565" cy="415" r="14" fill="#2d1a10" />
-                    <circle cx="561" cy="410" r="5" fill="#ffffff" />
-                    <circle cx="568" cy="420" r="2" fill="#ffffff" />
-
-                    <!-- Party Hat -->
-                    <g transform="translate(500, 180) rotate(15)">
-                        <path d="M 10 110 L 60 10 L 100 100 C 70 115, 30 115, 10 110 Z" fill="#a7f3d0" stroke="#5c3d2e"
-                            stroke-width="4" stroke-linejoin="round" />
-                        <circle cx="45" cy="70" r="7" fill="#fde047" />
-                        <circle cx="70" cy="85" r="6" fill="#fde047" />
-                        <circle cx="60" cy="40" r="5" fill="#fde047" />
-                        <circle cx="60" cy="8" r="14" fill="#f472b6" stroke="#5c3d2e" stroke-width="3" />
-                        <circle cx="60" cy="8" r="6" fill="#fde047" />
-                    </g>
-                </g>
-
-                <g id="birthday-cake" class="interactive-element" filter="url(#soft-shadow)">
-                    <!-- Stand -->
-                    <ellipse cx="280" cy="710" rx="125" ry="25" fill="#e2e8f0" stroke="#5c3d2e" stroke-width="4" />
-                    <path d="M 260 710 L 250 760 L 310 760 L 300 710 Z" fill="#cbd5e1" stroke="#5c3d2e" stroke-width="4"
-                        stroke-linejoin="round" />
-                    <ellipse cx="280" cy="760" rx="45" ry="12" fill="#e2e8f0" stroke="#5c3d2e" stroke-width="4" />
-
-                    <!-- Lower Cake Tier -->
-                    <path d="M 175 610 L 175 690 A 105 30 0 0 0 385 690 L 385 610 Z" fill="#fef3c7" stroke="#5c3d2e"
-                        stroke-width="4" stroke-linejoin="round" />
-                    <ellipse cx="280" cy="610" rx="105" ry="28" fill="#fffbebe6" stroke="#5c3d2e" stroke-width="4" />
-                    <path
-                        d="M 175 615 C 190 635, 200 635, 210 618 C 220 640, 235 640, 245 620 C 260 645, 280 645, 295 620 C 310 640, 330 640, 340 618 C 355 635, 370 635, 385 615 A 105 28 0 0 1 175 615 Z"
-                        fill="#ffffff" stroke="#5c3d2e" stroke-width="3" />
-                    <path d="M 177 655 A 103 26 0 0 0 383 655" fill="none" stroke="#f472b6" stroke-width="6"
-                        stroke-linecap="round" />
-
-                    <!-- Lower Layer Candies -->
-                    <circle cx="205" cy="670" r="5" fill="#f472b6" />
-                    <circle cx="240" cy="680" r="6" fill="#60a5fa" />
-                    <circle cx="280" cy="685" r="5" fill="#fde047" />
-                    <circle cx="320" cy="680" r="6" fill="#4ade80" />
-                    <circle cx="355" cy="670" r="5" fill="#f472b6" />
-
-                    <g transform="translate(270, 630)">
-                        <rect x="0" y="0" width="20" height="26" rx="6" fill="#bae6fd" stroke="#5c3d2e"
-                            stroke-width="2.5" />
-                        <text x="10" y="15" font-size="16" font-weight="bold" fill="#0284c7" text-anchor="middle"
-                            dominant-baseline="middle">7</text>
-                    </g>
-
-                    <!-- Upper Tier -->
-                    <path d="M 205 520 L 205 580 A 75 22 0 0 0 355 580 L 355 520 Z" fill="#fef3c7" stroke="#5c3d2e"
-                        stroke-width="4" stroke-linejoin="round" />
-                    <ellipse cx="280" cy="520" rx="75" ry="22" fill="#ffffff" stroke="#5c3d2e" stroke-width="4" />
-                    <path
-                        d="M 205 525 C 220 540, 230 540, 240 528 C 255 545, 270 545, 280 528 C 295 545, 310 545, 320 528 C 335 540, 345 540, 355 525 A 75 22 0 0 1 205 525 Z"
-                        fill="#ffffff" stroke="#5c3d2e" stroke-width="3" />
-
-                    <!-- Upper Sprinkles -->
-                    <rect x="230" y="550" width="8" height="4" rx="2" fill="#f472b6" transform="rotate(20 230 550)" />
-                    <rect x="260" y="555" width="8" height="4" rx="2" fill="#60a5fa" transform="rotate(-30 260 555)" />
-                    <rect x="300" y="555" width="8" height="4" rx="2" fill="#4ade80" transform="rotate(15 300 555)" />
-                    <rect x="330" y="545" width="8" height="4" rx="2" fill="#fde047" transform="rotate(-40 330 545)" />
-
-                    <!-- Wick & Candle '7' -->
-                    <line x1="280" y1="500" x2="280" y2="475" stroke="#5c3d2e" stroke-width="3.5"
-                        stroke-linecap="round" />
-                    <g transform="translate(252, 420)">
-                        <path d="M 10 10 L 50 10 L 28 70 L 12 70 L 28 28 L 10 28 Z" fill="#f472b6" stroke="#5c3d2e"
-                            stroke-width="4.5" stroke-linejoin="round" />
-                        <path d="M 15 15 L 44 15 L 25 64 L 17 64 L 31 24 L 15 24 Z" fill="#fbcfe8" />
-                        <circle cx="28" cy="19" r="2.5" fill="#ffffff" />
-                        <circle cx="24" cy="35" r="2.5" fill="#ffffff" />
-                        <circle cx="20" cy="50" r="2.5" fill="#ffffff" />
-                    </g>
-
-                    <!-- Flame -->
-                    <g id="candle-flame" class="flame" transform="translate(280, 410)" filter="url(#glow)">
-                        <path d="M 0 0 C -12 -15, -8 -30, 0 -42 C 8 -30, 12 -15, 0 0 Z" fill="#fb923c" />
-                        <path d="M 0 -4 C -6 -14, -4 -24, 0 -32 C 4 -24, 6 -14, 0 -4 Z" fill="#fde047" />
-                        <circle cx="0" cy="-15" r="4" fill="#ffffff" />
-                    </g>
-                </g>
-
-            </g>
-        </svg>
-
-        <!-- ESCENA 1 — PRESENTACIÓN -->
-        <div class="scene active" id="scene-0">
-            <div class="title-box">
-                <span class="badge-subtitle">✨ ¡Gran Celebración! ✨</span>
-                <h1 class="main-heading">¡Pablito cumple <br>
-                    <span class="number-7-wrapper">
-                        <span class="number-7">7</span>
-                    </span>
-                    años!
-                </h1>
-            </div>
-
-            <div class="pablito-hero-wrapper anim-bounce">
-                <svg viewBox="100 80 600 700">
-                    <use href="#pablito-illustration" />
-                </svg>
-            </div>
-
-            <div
-                style="text-align: center; color: var(--text-dark); font-weight: 800; font-size: 1.15rem; z-index: 20;">
-                🎈 ¡Una fiesta mágica e inolvidable! 🎈
-            </div>
-        </div>
-
-        <!-- ESCENA 2 — INVITACIÓN -->
-        <div class="scene" id="scene-1">
-            <div class="title-box">
-                <span class="badge-subtitle">🎉 ¡Estás Invitado! 🎉</span>
-                <h1 class="main-heading">Ven a celebrar <br>conmigo</h1>
-            </div>
-
-            <div class="pablito-hero-wrapper anim-wiggle">
-                <svg viewBox="100 80 600 700">
-                    <use href="#pablito-illustration" />
-                </svg>
-            </div>
-
-            <div style="text-align: center; color: #854D0E; font-weight: 800; font-size: 1.15rem; z-index: 20;">
-                ¡Habrá pastel, juegos y mucha diversión! 🎂
-            </div>
-        </div>
-
-        <!-- ESCENA 3 — INFORMACIÓN DEL EVENTO -->
-        <div class="scene" id="scene-2">
-            <div class="title-box" style="margin-top: 10px;">
-                <span class="badge-subtitle">📅 Datos del Evento</span>
-                <h1 class="main-heading" style="font-size: 1.8rem;">¿Dónde y Cuándo?</h1>
-            </div>
-
-            <div class="info-card">
-
-
-                <div class="info-item">
-                    <div class="info-icon">📅</div>
-                    <div class="info-text-group">
-                        <span class="info-label">Fecha</span>
-                        <span class="info-val">Sábado 10 de Octubre</span>
-                    </div>
-                </div>
-
-                <div class="info-item">
-                    <div class="info-icon">⏰</div>
-                    <div class="info-text-group">
-                        <span class="info-label">Hora</span>
-                        <span class="info-val">15:00 hrs</span>
-                    </div>
-                </div>
-
-                <div class="info-item">
-                    <div class="info-icon">📍</div>
-                    <div class="info-text-group">
-                        <span class="info-label">Lugar</span>
-                        <span class="info-val">Casa de Magi</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Mini Character Badge for Scene 3 -->
-            <div style="width: 130px; height: 120px; z-index: 15; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1));">
-                <svg viewBox="150 180 550 600">
-                    <use href="#pablito-illustration" />
-                </svg>
-            </div>
-        </div>
-
-        <!-- ESCENA 4 — CIERRE -->
-        <div class="scene" id="scene-3">
-            <div class="title-box">
-                <span class="badge-subtitle">🌟 ¡No Faltes! 🌟</span>
-                <h1 class="main-heading">¡Te esperamos!</h1>
-            </div>
-
-            <div id="fotoPablito" class="pablito-hero-wrapper anim-bounce">
-                <img src="./pablito.webp" alt="Foto de Pablito">
-            </div>
-
-            <div style="text-align: center; margin-bottom: 20px; z-index: 20;">
-                <p
-                    style="font-size: 1.25rem; font-weight: 800; color: #E11D48; text-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-                    Será un día súper divertido 🎉
-                </p>
-            </div>
-        </div>
-
-        <!-- Action Controls Bar -->
-        <div class="controls-overlay">
-            <button class="btn-action" id="btnAudio">
-                <span id="audioIcon">🔊</span> Música
-            </button>
-            <button class="btn-action btn-primary" id="btnReplay">
-                ↻ Repetir
-            </button>
-        </div>
-
-        <!-- Initial Start Modal Overlay -->
-        <div class="start-overlay" id="startOverlay">
-            <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px;">
-                <img src="./capi7.png" alt="Ilustración Pablito Capibara"
-                    style="width: 300; height: 300px; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.12));">
-            </div>
-            <h2 style="font-size: 1.8rem; font-weight: 900; color: var(--text-dark);">Te invito</h2>
-            <p style="font-size: 1rem; color: #666; margin-top: 8px;">¡Pablito cumple 7 años!</p>
-            <div class="big-play-btn" id="btnStart">▶</div>
-            <p style="font-size: 0.8rem; color: #888; margin-top: 18px;">Toca para abrir la tarjeta</p>
-        </div>
-
+  <!-- 1. PORTADA HERO -->
+  <section class="hero-section" id="hero">
+    <div class="badge-invite">¡ESTÁS INVITADO!</div>
+    <div class="hero-title-wrapper">
+      <span class="sparkle-icon sparkle-1">✦</span>
+      <span class="sparkle-icon sparkle-2">✦</span>
+      <h1 class="hero-title-name">GABI</h1>
     </div>
 
-    <script>
-        const SCENE_DURATIONS = [7000, 7000, 7000, 7000];
-        const TOTAL_SCENES = 4;
+    <div class="number-18-container">
+      <div class="number-glow-ring"></div>
+      <div class="number-18">18</div>
+    </div>
 
-        let currentScene = 0;
-        let sceneTimer = null;
-        let progressInterval = null;
-        let sceneStartTime = 0;
-        let isPaused = false;
-        let audioMuted = false;
+    <div class="hero-subtitle">¡Mis 18 años!</div>
 
-        let isAudioPlaying = false;
+    <p class="hero-message">
+      Una noche especial merece personas especiales. ¡Quiero celebrar contigo el inicio de esta gran etapa!
+    </p>
 
-        // Audio Setup with capibara_notificacion.mp3
-        const bgMusic = new Audio('capibara_notificacion.mp3');
-        bgMusic.loop = true;
+    <button class="btn-neon" id="btnOpenInvite">
+      <span>ABRIR INVITACIÓN</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+      </svg>
+    </button>
+  </section>
 
-        function startAudio() {
-            if (audioMuted) return;
-            bgMusic.play().then(() => {
-                isAudioPlaying = true;
-            }).catch((err) => {
-                console.log('Audio playback waiting for user gesture or error:', err);
-            });
-        }
+  <!-- CONTENIDO REVELADO AL PULSAR EL BOTÓN -->
+  <div class="main-content" id="mainContent">
 
-        function stopAudio() {
-            bgMusic.pause();
-            isAudioPlaying = false;
-        }
+    <!-- 2. INFORMACIÓN DEL EVENTO -->
+    <section class="info-section">
+      <div class="section-header">
+        <h2 class="section-title">¡CELEBREMOS JUNTOS!</h2>
+      </div>
 
-        // Particle System for Confetti
-        const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
+      <div class="cards-grid">
+        <!-- Fecha -->
+        <article class="info-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5z"/>
+            </svg>
+          </div>
+          <div class="card-label">FECHA</div>
+          <div class="card-value">Sábado 7</div>
+          <span class="btn-card-action">¡Guarda el día!</span>
+        </article>
 
-        function resizeCanvas() {
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+        <!-- Lugar -->
+        <article class="info-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+          </div>
+          <div class="card-label">UBICACIÓN</div>
+          <div class="card-value">Casa Magi</div>
+          <a href="https://maps.app.goo.gl/1jHTnaegU6UTaGLz6" target="_blank" rel="noopener noreferrer" class="btn-card-action">
+            <span>Cómo llegar</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"/>
+            </svg>
+          </a>
+        </article>
 
-        class ConfettiParticle {
-            constructor() {
-                this.reset();
-            }
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = -20;
-                this.size = Math.random() * 8 + 4;
-                this.color = ['#F43F5E', '#FDE047', '#3B82F6', '#22C55E', '#FDA4AF'][Math.floor(Math.random() * 5)];
-                this.vy = Math.random() * 2 + 1.5;
-                this.vx = Math.random() * 2 - 1;
-                this.rotation = Math.random() * 360;
-                this.vRot = Math.random() * 4 - 2;
-            }
-            update() {
-                this.y += this.vy;
-                this.x += this.vx;
-                this.rotation += this.vRot;
-                if (this.y > canvas.height + 20) {
-                    this.reset();
-                }
-            }
-            draw() {
-                ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.rotate((this.rotation * Math.PI) / 180);
-                ctx.fillStyle = this.color;
-                ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
-                ctx.restore();
-            }
-        }
+        <!-- Hora -->
+        <article class="info-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+            </svg>
+          </div>
+          <div class="card-label">HORA</div>
+          <div class="card-value">14:00 HRS</div>
+          <span class="btn-card-action">¡Sé puntual!</span>
+        </article>
+      </div>
+    </section>
 
-        for (let i = 0; i < 45; i++) {
-            particles.push(new ConfettiParticle());
-        }
+    <!-- 3. SOBRE VIRTUAL DE REGALO -->
+    <section class="envelope-section">
+      <div class="envelope-intro">
+        <h2 class="section-title">REGALO ESPECIAL</h2>
+        <p class="hero-message" style="margin-top: 0.5rem; margin-bottom: 0;">
+          Tu presencia es mi mejor regalo, pero si deseas tener un detalle conmigo, aquí tienes mi sobre virtual.
+        </p>
+      </div>
 
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
+      <div class="envelope-wrapper" id="envelopeWrapper">
+        <div class="envelope-flap"></div>
+        <div class="envelope-seal" id="envelopeSeal">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </div>
+        <div class="envelope-body"></div>
 
-        // Story Scene Logic
-        function showScene(index) {
-            currentScene = index;
-            document.querySelectorAll('.scene').forEach((sc, idx) => {
-                sc.classList.toggle('active', idx === index);
-            });
+        <div class="envelope-card">
+          <div style="color: var(--gold-accent); font-weight: 700; font-size: 0.95rem;">
+            Un detalle para Gabi 🎁
+          </div>
+          <p class="card-text">
+            ¡Gracias por ser parte de este momento tan importante en mi vida!
+          </p>
+          <button class="btn-gift-small" id="btnOpenGiftModal">
+            Enviar regalo
+          </button>
+        </div>
+      </div>
+    </section>
 
-            for (let i = 0; i < TOTAL_SCENES; i++) {
-                const fill = document.getElementById(`pfill-${i}`);
-                if (i < index) {
-                    fill.style.width = '100%';
-                } else if (i > index) {
-                    fill.style.width = '0%';
-                }
-            }
+    <!-- 4. MENSAJE FINAL Y DESPEDIDA -->
+    <footer class="footer-section">
+      <div class="footer-quote">
+        "¡Cumplir 18 es comenzar una nueva aventura!"
+      </div>
+      <p class="footer-sub">
+        Espero compartir este día tan especial contigo. ¡No faltes!
+      </p>
+      <div class="footer-signature">
+        Con cariño, GABI ❤️
+      </div>
+    </footer>
 
-            startSceneTimer();
-        }
+  </div>
 
-        function startSceneTimer() {
-            if (sceneTimer) clearTimeout(sceneTimer);
-            if (progressInterval) clearInterval(progressInterval);
+</main>
 
-            const duration = SCENE_DURATIONS[currentScene];
-            sceneStartTime = Date.now();
+<!-- MODAL DATOS DE TRANSFERENCIA BANCARIA -->
+<div class="modal-overlay" id="giftModal">
+  <div class="modal-box">
+    <button class="modal-close" id="btnCloseModal">&times;</button>
+    <h3 class="modal-title">DATOS DE TRANSFERENCIA</h3>
 
-            progressInterval = setInterval(() => {
-                if (isPaused) return;
-                const elapsed = Date.now() - sceneStartTime;
-                const pct = Math.min(100, (elapsed / duration) * 100);
-                const fill = document.getElementById(`pfill-${currentScene}`);
-                if (fill) fill.style.width = pct + '%';
-            }, 50);
+    <div class="bank-details-list">
+      <div class="bank-item">
+        <span class="bank-label">BANCO</span>
+        <span class="bank-val" id="valBanco">CONFIGURAR BANCO</span>
+      </div>
+      <div class="bank-item">
+        <span class="bank-label">TIPO DE CUENTA</span>
+        <span class="bank-val" id="valTipo">CONFIGURAR TIPO CUENTA</span>
+      </div>
+      <div class="bank-item">
+        <span class="bank-label">NÚMERO DE CUENTA</span>
+        <span class="bank-val" id="valCuenta">0000 0000 0000 0000</span>
+      </div>
+      <div class="bank-item">
+        <span class="bank-label">TITULAR</span>
+        <span class="bank-val" id="valTitular">GABI</span>
+      </div>
+      <div class="bank-item">
+        <span class="bank-label">DOCUMENTO / RUT</span>
+        <span class="bank-val" id="valDocumento">CONFIGURAR DOCUMENTO</span>
+      </div>
+    </div>
 
-            sceneTimer = setTimeout(() => {
-                if (currentScene < TOTAL_SCENES - 1) {
-                    showScene(currentScene + 1);
-                } else {
-                    document.getElementById(`pfill-${TOTAL_SCENES - 1}`).style.width = '100%';
-                }
-            }, duration);
-        }
+    <button class="btn-neon" id="btnCopyData" style="font-size: 0.8rem; min-height: 40px;">
+      COPIAR DATOS
+    </button>
+    <div class="copy-feedback" id="copyFeedback">¡Datos copiados al portapapeles!</div>
+  </div>
+</div>
 
-        function nextScene() {
-            if (currentScene < TOTAL_SCENES - 1) {
-                showScene(currentScene + 1);
-            } else {
-                showScene(0);
-            }
-        }
+<!-- SCRIPT JS COMPLETO -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
 
-        function prevScene() {
-            if (currentScene > 0) {
-                showScene(currentScene - 1);
-            }
-        }
+    // ==========================================
+    // CONFIGURACIÓN EDITABLE DE DATOS BANCARIOS
+    // ==========================================
+    const DATOS_REGALO = {
+      banco: "Nombre de tu Banco",
+      tipoCuenta: "Cuenta Vista / Ahorro",
+      numeroCuenta: "1234567890",
+      titular: "Gabi",
+      documento: "12.345.678-9"
+    };
 
-        // Event Listeners
-        const startOverlay = document.getElementById('startOverlay');
-        const btnStart = document.getElementById('btnStart');
-        const btnAudio = document.getElementById('btnAudio');
-        const btnReplay = document.getElementById('btnReplay');
-        const tapArea = document.getElementById('tapArea');
+    // Inyectar datos en modal
+    document.getElementById('valBanco').textContent = DATOS_REGALO.banco;
+    document.getElementById('valTipo').textContent = DATOS_REGALO.tipoCuenta;
+    document.getElementById('valCuenta').textContent = DATOS_REGALO.numeroCuenta;
+    document.getElementById('valTitular').textContent = DATOS_REGALO.titular;
+    document.getElementById('valDocumento').textContent = DATOS_REGALO.documento;
 
-        btnStart.addEventListener('click', () => {
-            startAudio();
-            startOverlay.classList.add('hidden');
-            showScene(0);
+    // ==========================================
+    // LOGICA REVELADO DE INVITACIÓN
+    // ==========================================
+    const btnOpenInvite = document.getElementById('btnOpenInvite');
+    const mainContent = document.getElementById('mainContent');
+    const musicBtn = document.getElementById('musicBtn');
+    const bgAudio = document.getElementById('bgAudio');
+    const musicIconOff = document.getElementById('musicIconOff');
+    const musicIconOn = document.getElementById('musicIconOn');
+
+    let musicPlaying = false;
+
+    btnOpenInvite.addEventListener('click', () => {
+      mainContent.classList.add('revealed');
+      musicBtn.classList.add('visible');
+
+      // Desplazamiento suave al contenido
+      setTimeout(() => {
+        mainContent.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+
+      // Lanzar ráfaga de confeti de celebración
+      launchConfettiBurst();
+
+      // Intentar iniciar audio
+      toggleAudio(true);
+    });
+
+    // ==========================================
+    // CONTROL DE AUDIO
+    // ==========================================
+    function toggleAudio(forcePlay = false) {
+      if (forcePlay || !musicPlaying) {
+        bgAudio.play().then(() => {
+          musicPlaying = true;
+          musicBtn.classList.add('playing');
+          musicIconOff.style.display = 'none';
+          musicIconOn.style.display = 'block';
+        }).catch(err => {
+          console.log("Autoplay bloqueado por navegador:", err);
         });
+      } else {
+        bgAudio.pause();
+        musicPlaying = false;
+        musicBtn.classList.remove('playing');
+        musicIconOff.style.display = 'block';
+        musicIconOn.style.display = 'none';
+      }
+    }
 
-        btnAudio.addEventListener('click', (e) => {
-            e.stopPropagation();
-            audioMuted = !audioMuted;
-            document.getElementById('audioIcon').textContent = audioMuted ? '🔇' : '🔊';
-            if (!audioMuted) {
-                startAudio();
-            } else {
-                stopAudio();
-            }
-        });
+    musicBtn.addEventListener('click', () => toggleAudio());
 
-        btnReplay.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (!audioMuted) {
-                bgMusic.currentTime = 0;
-                startAudio();
-            }
-            showScene(0);
-        });
+    // ==========================================
+    // INTERACCIÓN SOBRE VIRTUAL
+    // ==========================================
+    const envelopeWrapper = document.getElementById('envelopeWrapper');
+    const btnOpenGiftModal = document.getElementById('btnOpenGiftModal');
+    const giftModal = document.getElementById('giftModal');
+    const btnCloseModal = document.getElementById('btnCloseModal');
+    const btnCopyData = document.getElementById('btnCopyData');
+    const copyFeedback = document.getElementById('copyFeedback');
 
-        tapArea.addEventListener('click', (e) => {
-            const rect = tapArea.getBoundingClientRect();
-            const clickX = e.clientX - rect.left;
-            if (clickX > rect.width / 2) {
-                nextScene();
-            } else {
-                prevScene();
-            }
+    envelopeWrapper.addEventListener('click', (e) => {
+      if (!envelopeWrapper.classList.contains('open')) {
+        envelopeWrapper.classList.add('open');
+        launchConfettiBurst();
+      }
+    });
+
+    btnOpenGiftModal.addEventListener('click', (e) => {
+      e.stopPropagation();
+      giftModal.classList.add('active');
+    });
+
+    btnCloseModal.addEventListener('click', () => {
+      giftModal.classList.remove('active');
+    });
+
+    giftModal.addEventListener('click', (e) => {
+      if (e.target === giftModal) giftModal.classList.remove('active');
+    });
+
+    // Copiar Datos al Portapapeles
+    btnCopyData.addEventListener('click', () => {
+      const textToCopy = `DATOS DE TRANSFERENCIA DE GABI:\nBanco: ${DATOS_REGALO.banco}\nTipo: ${DATOS_REGALO.tipoCuenta}\nCuenta: ${DATOS_REGALO.numeroCuenta}\nTitular: ${DATOS_REGALO.titular}\nDocumento: ${DATOS_REGALO.documento}`;
+
+      const textArea = document.createElement("textarea");
+      textArea.value = textToCopy;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        copyFeedback.classList.add('show');
+        setTimeout(() => copyFeedback.classList.remove('show'), 2500);
+      } catch (err) {
+        console.error('Error al copiar: ', err);
+      }
+      document.body.removeChild(textArea);
+    });
+
+    // ==========================================
+    // SISTEMA DE PARTÍCULAS LUMINOSAS
+    // ==========================================
+    const canvasPart = document.getElementById('particlesCanvas');
+    const ctxPart = canvasPart.getContext('2d');
+    let particlesArray = [];
+
+    function resizePartCanvas() {
+      canvasPart.width = window.innerWidth;
+      canvasPart.height = window.innerHeight;
+    }
+    resizePartCanvas();
+    window.addEventListener('resize', resizePartCanvas);
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvasPart.width;
+        this.y = Math.random() * canvasPart.height;
+        this.size = Math.random() * 2.5 + 0.5;
+        this.speedY = Math.random() * 0.4 + 0.1;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.opacity = Math.random() * 0.6 + 0.2;
+        this.color = Math.random() > 0.5 ? '#ec4899' : (Math.random() > 0.5 ? '#fbbf24' : '#8b5cf6');
+      }
+      update() {
+        this.y -= this.speedY;
+        this.x += this.speedX;
+        if (this.y < 0) this.reset();
+      }
+      draw() {
+        ctxPart.beginPath();
+        ctxPart.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctxPart.fillStyle = this.color;
+        ctxPart.globalAlpha = this.opacity;
+        ctxPart.shadowBlur = 8;
+        ctxPart.shadowColor = this.color;
+        ctxPart.fill();
+      }
+    }
+
+    for (let i = 0; i < 45; i++) {
+      particlesArray.push(new Particle());
+    }
+
+    function animateParticles() {
+      ctxPart.clearRect(0, 0, canvasPart.width, canvasPart.height);
+      particlesArray.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // ==========================================
+    // CHISPAS AL TOCAR/MOVER DEDO O CURSOR
+    // ==========================================
+    const sparkCanvas = document.getElementById('sparkleCanvas');
+    const sparkCtx = sparkCanvas.getContext('2d');
+    let sparkles = [];
+
+    function resizeSparkCanvas() {
+      sparkCanvas.width = window.innerWidth;
+      sparkCanvas.height = window.innerHeight;
+    }
+    resizeSparkCanvas();
+    window.addEventListener('resize', resizeSparkCanvas);
+
+    function addSparkle(x, y) {
+      for (let i = 0; i < 3; i++) {
+        sparkles.push({
+          x: x,
+          y: y,
+          vx: (Math.random() - 0.5) * 4,
+          vy: (Math.random() - 0.5) * 4,
+          size: Math.random() * 3 + 1,
+          color: Math.random() > 0.5 ? '#fbbf24' : '#ec4899',
+          life: 1
         });
-    </script>
+      }
+    }
+
+    window.addEventListener('mousemove', (e) => addSparkle(e.clientX, e.clientY));
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches[0]) addSparkle(e.touches[0].clientX, e.touches[0].clientY);
+    });
+
+    function animateSparkles() {
+      sparkCtx.clearRect(0, 0, sparkCanvas.width, sparkCanvas.height);
+      for (let i = sparkles.length - 1; i >= 0; i--) {
+        let s = sparkles[i];
+        s.x += s.vx;
+        s.y += s.vy;
+        s.life -= 0.04;
+        if (s.life <= 0) {
+          sparkles.splice(i, 1);
+        } else {
+          sparkCtx.beginPath();
+          sparkCtx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+          sparkCtx.fillStyle = s.color;
+          sparkCtx.globalAlpha = s.life;
+          sparkCtx.shadowBlur = 6;
+          sparkCtx.shadowColor = s.color;
+          sparkCtx.fill();
+        }
+      }
+      requestAnimationFrame(animateSparkles);
+    }
+    animateSparkles();
+
+    // ==========================================
+    // MOTOR DE CONFETI NATIVO
+    // ==========================================
+    const confettiCanvas = document.getElementById('confettiCanvas');
+    const ctxConfetti = confettiCanvas.getContext('2d');
+    let confettiPieces = [];
+
+    function resizeConfettiCanvas() {
+      confettiCanvas.width = window.innerWidth;
+      confettiCanvas.height = window.innerHeight;
+    }
+    resizeConfettiCanvas();
+    window.addEventListener('resize', resizeConfettiCanvas);
+
+    class ConfettiPiece {
+      constructor() {
+        this.x = Math.random() * confettiCanvas.width;
+        this.y = -20;
+        this.size = Math.random() * 8 + 4;
+        this.speedY = Math.random() * 4 + 2;
+        this.speedX = (Math.random() - 0.5) * 3;
+        this.rotation = Math.random() * 360;
+        this.rotSpeed = (Math.random() - 0.5) * 10;
+        const colors = ['#ec4899', '#8b5cf6', '#fbbf24', '#fef08a', '#38bdf8'];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX;
+        this.rotation += this.rotSpeed;
+      }
+      draw() {
+        ctxConfetti.save();
+        ctxConfetti.translate(this.x, this.y);
+        ctxConfetti.rotate((this.rotation * Math.PI) / 180);
+        ctxConfetti.fillStyle = this.color;
+        ctxConfetti.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
+        ctxConfetti.restore();
+      }
+    }
+
+    function launchConfettiBurst() {
+      for (let i = 0; i < 90; i++) {
+        confettiPieces.push(new ConfettiPiece());
+      }
+    }
+
+    function animateConfetti() {
+      ctxConfetti.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      confettiPieces.forEach((c, index) => {
+        c.update();
+        c.draw();
+        if (c.y > confettiCanvas.height) {
+          confettiPieces.splice(index, 1);
+        }
+      });
+      requestAnimationFrame(animateConfetti);
+    }
+    animateConfetti();
+
+  });
+</script>
 </body>
-
 </html>
