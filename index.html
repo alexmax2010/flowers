@@ -1,19 +1,39 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>¡Mis 18 Años! - Gabi ✦ Invitación Digital</title>
 
+  <!-- Open Graph / Meta etiquetas para WhatsApp y Redes Sociales -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="¡Mis 18 Años! - Gabi ✦ Invitación Digital">
+  <meta property="og:description"
+    content="Una noche especial merece personas especiales. ¡Te invito a celebrar mis 18 años este Sábado 7 en Casa Magi!">
+  <meta property="og:image" content="https://placehold.co/1200x630/1a082b/fbbf24?text=Mis+18+Anos+Gabi">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="es_ES">
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="¡Mis 18 Años! - Gabi ✦ Invitación Digital">
+  <meta name="twitter:description"
+    content="Una noche especial merece personas especiales. ¡Te invito a celebrar mis 18 años este Sábado 7 en Casa Magi!">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/1a082b/fbbf24?text=Mis+18+Anos+Gabi">
+
   <!-- Fuentes Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@1,700;1,800&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@1,700;1,800&family=Great+Vibes&display=swap"
+    rel="stylesheet">
 
   <style>
     /* ==========================================================================
-       1. VARIABLES GLOBALES & RESET MOBILE-FIRST
-       ========================================================================== */
+           1. VARIABLES GLOBALES & RESET MOBILE-FIRST
+           ========================================================================== */
     :root {
       --bg-dark: #0a0612;
       --purple-deep: #1d0933;
@@ -108,9 +128,17 @@
     }
 
     @keyframes orbFloat {
-      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-      50% { transform: translate(30px, 40px) scale(1.15) rotate(90deg); }
-      100% { transform: translate(-25px, -25px) scale(0.9) rotate(180deg); }
+      0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+      }
+
+      50% {
+        transform: translate(30px, 40px) scale(1.15) rotate(90deg);
+      }
+
+      100% {
+        transform: translate(-25px, -25px) scale(0.9) rotate(180deg);
+      }
     }
 
     /* Globos Flotantes Animados */
@@ -133,21 +161,64 @@
       filter: drop-shadow(0 8px 15px rgba(236, 72, 153, 0.4));
     }
 
-    .balloon-1 { left: 5%; width: 45px; animation-duration: 12s; animation-delay: 0s; }
-    .balloon-2 { right: 8%; width: 55px; animation-duration: 15s; animation-delay: 3s; filter: drop-shadow(0 8px 15px rgba(251, 191, 36, 0.4)); }
-    .balloon-3 { left: 80%; width: 40px; animation-duration: 11s; animation-delay: 6s; filter: drop-shadow(0 8px 15px rgba(139, 92, 246, 0.4)); }
-    .balloon-4 { left: 18%; width: 50px; animation-duration: 16s; animation-delay: 9s; }
+    .balloon-1 {
+      left: 5%;
+      width: 45px;
+      animation-duration: 12s;
+      animation-delay: 0s;
+    }
+
+    .balloon-2 {
+      right: 8%;
+      width: 55px;
+      animation-duration: 15s;
+      animation-delay: 3s;
+      filter: drop-shadow(0 8px 15px rgba(251, 191, 36, 0.4));
+    }
+
+    .balloon-3 {
+      left: 80%;
+      width: 40px;
+      animation-duration: 11s;
+      animation-delay: 6s;
+      filter: drop-shadow(0 8px 15px rgba(139, 92, 246, 0.4));
+    }
+
+    .balloon-4 {
+      left: 18%;
+      width: 50px;
+      animation-duration: 16s;
+      animation-delay: 9s;
+    }
 
     @keyframes floatBalloon {
-      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-      10% { opacity: 0.75; }
-      50% { transform: translateY(-60vh) rotate(15deg) translateX(20px); }
-      90% { opacity: 0.75; }
-      100% { transform: translateY(-120vh) rotate(-15deg) translateX(-20px); opacity: 0; }
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.75;
+      }
+
+      50% {
+        transform: translateY(-60vh) rotate(15deg) translateX(20px);
+      }
+
+      90% {
+        opacity: 0.75;
+      }
+
+      100% {
+        transform: translateY(-120vh) rotate(-15deg) translateX(-20px);
+        opacity: 0;
+      }
     }
 
     /* Canvas */
-    #particlesCanvas, #confettiCanvas, #sparkleCanvas {
+    #particlesCanvas,
+    #confettiCanvas,
+    #sparkleCanvas {
       position: fixed;
       top: 0;
       left: 0;
@@ -155,9 +226,18 @@
       height: 100%;
       pointer-events: none;
     }
-    #particlesCanvas { z-index: 1; }
-    #sparkleCanvas { z-index: 2; }
-    #confettiCanvas { z-index: 999; }
+
+    #particlesCanvas {
+      z-index: 1;
+    }
+
+    #sparkleCanvas {
+      z-index: 2;
+    }
+
+    #confettiCanvas {
+      z-index: 999;
+    }
 
     /* Contenedor Principal Adaptativo */
     .app-container {
@@ -190,8 +270,8 @@
     }
 
     /* ==========================================================================
-       2. BOTÓN DE MÚSICA FLOTANTE (Optimizado Móvil)
-       ========================================================================== */
+           2. BOTÓN DE MÚSICA FLOTANTE (Optimizado Móvil)
+           ========================================================================== */
     .music-toggle {
       position: fixed;
       bottom: 1.25rem;
@@ -234,18 +314,28 @@
     }
 
     @keyframes rotateMusic {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
     @keyframes pulseGlow {
-      0% { box-shadow: 0 0 10px rgba(236, 72, 153, 0.4), 0 0 20px rgba(236, 72, 153, 0.2); }
-      100% { box-shadow: 0 0 25px rgba(251, 191, 36, 0.8), 0 0 35px rgba(236, 72, 153, 0.6); }
+      0% {
+        box-shadow: 0 0 10px rgba(236, 72, 153, 0.4), 0 0 20px rgba(236, 72, 153, 0.2);
+      }
+
+      100% {
+        box-shadow: 0 0 25px rgba(251, 191, 36, 0.8), 0 0 35px rgba(236, 72, 153, 0.6);
+      }
     }
 
     /* ==========================================================================
-       3. PORTADA / HERO SCREEN (Responsive Clamp & Sparkle Animations)
-       ========================================================================== */
+           3. PORTADA / HERO SCREEN (Responsive Clamp & Sparkle Animations)
+           ========================================================================== */
     .hero-section {
       min-height: 85vh;
       display: flex;
@@ -274,8 +364,16 @@
     }
 
     @keyframes badgeGlow {
-      0% { box-shadow: 0 0 10px rgba(251, 191, 36, 0.2); border-color: rgba(251, 191, 36, 0.4); }
-      100% { box-shadow: 0 0 22px rgba(236, 72, 153, 0.6); border-color: rgba(236, 72, 153, 0.8); color: #fff; }
+      0% {
+        box-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
+        border-color: rgba(251, 191, 36, 0.4);
+      }
+
+      100% {
+        box-shadow: 0 0 22px rgba(236, 72, 153, 0.6);
+        border-color: rgba(236, 72, 153, 0.8);
+        color: #fff;
+      }
     }
 
     .hero-title-wrapper {
@@ -290,13 +388,37 @@
       pointer-events: none;
     }
 
-    .sparkle-1 { top: -10px; right: -20px; font-size: 1.4rem; animation-delay: 0s; }
-    .sparkle-2 { bottom: 10px; left: -25px; font-size: 1.2rem; animation-delay: 2s; color: var(--neon-fuchsia); }
+    .sparkle-1 {
+      top: -10px;
+      right: -20px;
+      font-size: 1.4rem;
+      animation-delay: 0s;
+    }
+
+    .sparkle-2 {
+      bottom: 10px;
+      left: -25px;
+      font-size: 1.2rem;
+      animation-delay: 2s;
+      color: var(--neon-fuchsia);
+    }
 
     @keyframes sparkleSpin {
-      0% { transform: scale(0.6) rotate(0deg); opacity: 0.3; }
-      50% { transform: scale(1.2) rotate(180deg); opacity: 1; filter: drop-shadow(0 0 10px currentColor); }
-      100% { transform: scale(0.6) rotate(360deg); opacity: 0.3; }
+      0% {
+        transform: scale(0.6) rotate(0deg);
+        opacity: 0.3;
+      }
+
+      50% {
+        transform: scale(1.2) rotate(180deg);
+        opacity: 1;
+        filter: drop-shadow(0 0 10px currentColor);
+      }
+
+      100% {
+        transform: scale(0.6) rotate(360deg);
+        opacity: 0.3;
+      }
     }
 
     .hero-title-name {
@@ -315,9 +437,17 @@
     }
 
     @keyframes textGradientShift {
-      0% { background-position: 0% center; }
-      50% { background-position: 100% center; }
-      100% { background-position: 0% center; }
+      0% {
+        background-position: 0% center;
+      }
+
+      50% {
+        background-position: 100% center;
+      }
+
+      100% {
+        background-position: 0% center;
+      }
     }
 
     .number-18-container {
@@ -353,19 +483,39 @@
     }
 
     @keyframes ringPulse {
-      0% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.4; }
-      100% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.9; }
+      0% {
+        transform: translate(-50%, -50%) scale(0.85);
+        opacity: 0.4;
+      }
+
+      100% {
+        transform: translate(-50%, -50%) scale(1.15);
+        opacity: 0.9;
+      }
     }
 
     @keyframes metallicShimmer {
-      0% { background-position: 0% center; }
-      100% { background-position: 200% center; }
+      0% {
+        background-position: 0% center;
+      }
+
+      100% {
+        background-position: 200% center;
+      }
     }
 
     @keyframes floatSlow {
-      0% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-8px) rotate(1deg); }
-      100% { transform: translateY(-14px) rotate(-1deg); }
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-8px) rotate(1deg);
+      }
+
+      100% {
+        transform: translateY(-14px) rotate(-1deg);
+      }
     }
 
     .hero-subtitle {
@@ -426,8 +576,13 @@
     }
 
     @keyframes btnShimmer {
-      0% { transform: translateX(-100%) rotate(30deg); }
-      100% { transform: translateX(100%) rotate(30deg); }
+      0% {
+        transform: translateX(-100%) rotate(30deg);
+      }
+
+      100% {
+        transform: translateX(100%) rotate(30deg);
+      }
     }
 
     .btn-neon:active {
@@ -436,8 +591,8 @@
     }
 
     /* ==========================================================================
-       4. SECCIÓN DETALLES DEL EVENTO
-       ========================================================================== */
+           4. SECCIÓN DETALLES DEL EVENTO
+           ========================================================================== */
     .section-header {
       text-align: center;
       margin-bottom: 1.8rem;
@@ -465,8 +620,15 @@
     }
 
     @keyframes linePulse {
-      0% { width: 40%; opacity: 0.5; }
-      100% { width: 80%; opacity: 1; }
+      0% {
+        width: 40%;
+        opacity: 0.5;
+      }
+
+      100% {
+        width: 80%;
+        opacity: 1;
+      }
     }
 
     .cards-grid {
@@ -519,8 +681,14 @@
     }
 
     @keyframes cardBorderScan {
-      0% { left: -100%; }
-      50%, 100% { left: 100%; }
+      0% {
+        left: -100%;
+      }
+
+      50%,
+      100% {
+        left: 100%;
+      }
     }
 
     .card-icon {
@@ -538,12 +706,25 @@
       animation: iconFloat 3s ease-in-out infinite alternate;
     }
 
-    .info-card:nth-child(2) .card-icon { animation-delay: -1s; }
-    .info-card:nth-child(3) .card-icon { animation-delay: -2s; }
+    .info-card:nth-child(2) .card-icon {
+      animation-delay: -1s;
+    }
+
+    .info-card:nth-child(3) .card-icon {
+      animation-delay: -2s;
+    }
 
     @keyframes iconFloat {
-      0% { transform: translateY(0); box-shadow: 0 0 10px rgba(236, 72, 153, 0.2); }
-      100% { transform: translateY(-6px); box-shadow: 0 0 20px rgba(251, 191, 36, 0.5); color: #fff; }
+      0% {
+        transform: translateY(0);
+        box-shadow: 0 0 10px rgba(236, 72, 153, 0.2);
+      }
+
+      100% {
+        transform: translateY(-6px);
+        box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+        color: #fff;
+      }
     }
 
     .card-icon svg {
@@ -593,8 +774,8 @@
     }
 
     /* ==========================================================================
-       5. SOBRE VIRTUAL 3D (Optimizado para Touch Screen + FX)
-       ========================================================================== */
+           5. SOBRE VIRTUAL 3D (Optimizado para Touch Screen + FX)
+           ========================================================================== */
     .envelope-section {
       display: flex;
       flex-direction: column;
@@ -629,6 +810,7 @@
       border-radius: 14px;
       border: 1px solid rgba(236, 72, 153, 0.4);
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(139, 92, 246, 0.3);
+      z-index: 2;
     }
 
     .envelope-flap {
@@ -643,7 +825,7 @@
       transform-origin: top;
       transition: transform 0.6s ease-in-out;
       z-index: 5;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
     }
 
     .envelope-seal {
@@ -666,8 +848,15 @@
     }
 
     @keyframes sealPulse {
-      0% { transform: translateX(-50%) scale(1); box-shadow: 0 0 15px rgba(251, 191, 36, 0.6); }
-      100% { transform: translateX(-50%) scale(1.1); box-shadow: 0 0 28px rgba(251, 191, 36, 0.9); }
+      0% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
+      }
+
+      100% {
+        transform: translateX(-50%) scale(1.1);
+        box-shadow: 0 0 28px rgba(251, 191, 36, 0.9);
+      }
     }
 
     .envelope-seal svg {
@@ -691,9 +880,11 @@
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 3;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+      z-index: 1;
+      opacity: 0;
+      pointer-events: none;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     }
 
     .card-content-inner {
@@ -749,6 +940,8 @@
     .envelope-wrapper.open .envelope-card {
       transform: translateY(-105px);
       z-index: 4;
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .envelope-wrapper.open .card-content-inner {
@@ -758,8 +951,8 @@
     }
 
     /* ==========================================================================
-       6. MODAL DATOS BANCARIOS (100% Mobile Friendly)
-       ========================================================================== */
+           6. MODAL DATOS BANCARIOS (100% Mobile Friendly)
+           ========================================================================== */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -879,8 +1072,8 @@
     }
 
     /* ==========================================================================
-       7. FOOTER Y MENSAJE FINAL
-       ========================================================================== */
+           7. FOOTER Y MENSAJE FINAL
+           ========================================================================== */
     .footer-section {
       text-align: center;
       background: var(--glass-bg);
@@ -920,577 +1113,631 @@
     }
 
     @keyframes heartPulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.06); text-shadow: 0 0 20px rgba(236, 72, 153, 0.8); }
-      100% { transform: scale(1); }
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.06);
+        text-shadow: 0 0 20px rgba(236, 72, 153, 0.8);
+      }
+
+      100% {
+        transform: scale(1);
+      }
     }
 
     /* ==========================================================================
-       8. ANIMACIONES Y ACCESIBILIDAD
-       ========================================================================== */
+           8. ANIMACIONES Y ACCESIBILIDAD
+           ========================================================================== */
     @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @keyframes zoomIn {
-      from { opacity: 0; transform: scale(0.85); }
-      to { opacity: 1; transform: scale(1); }
+      from {
+        opacity: 0;
+        transform: scale(0.85);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, ::before, ::after {
+
+      *,
+      ::before,
+      ::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
       }
-      .gradient-orb, .number-18, .balloon, .hero-title-name, .music-toggle {
+
+      .gradient-orb,
+      .number-18,
+      .balloon,
+      .hero-title-name,
+      .music-toggle {
         animation: none !important;
       }
     }
   </style>
 </head>
+
 <body>
 
-<!-- Fondo Ambient Responsorial -->
-<div class="ambient-bg">
-  <div class="gradient-orb orb-1"></div>
-  <div class="gradient-orb orb-2"></div>
-  <div class="gradient-orb orb-3"></div>
-</div>
+  <!-- Fondo Ambient Responsorial -->
+  <div class="ambient-bg">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
 
-<!-- Globos Flotantes en Fondo -->
-<div class="floating-balloons-container">
-  <!-- SVG Balloon 1 -->
-  <svg class="balloon balloon-1" viewBox="0 0 50 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="25" cy="28" rx="20" ry="25" fill="url(#balloonGrad1)"/>
-    <path d="M25 53 L22 57 L28 57 Z" fill="#ec4899"/>
-    <path d="M25 57 Q28 64 22 70" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" fill="none"/>
-    <defs>
-      <radialGradient id="balloonGrad1" cx="35%" cy="30%" r="65%">
-        <stop offset="0%" stop-color="#f472b6"/>
-        <stop offset="100%" stop-color="#be185d"/>
-      </radialGradient>
-    </defs>
-  </svg>
-  <!-- SVG Balloon 2 -->
-  <svg class="balloon balloon-2" viewBox="0 0 50 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="25" cy="28" rx="20" ry="25" fill="url(#balloonGrad2)"/>
-    <path d="M25 53 L22 57 L28 57 Z" fill="#fbbf24"/>
-    <path d="M25 57 Q20 63 26 70" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" fill="none"/>
-    <defs>
-      <radialGradient id="balloonGrad2" cx="35%" cy="30%" r="65%">
-        <stop offset="0%" stop-color="#fef08a"/>
-        <stop offset="100%" stop-color="#d97706"/>
-      </radialGradient>
-    </defs>
-  </svg>
-  <!-- SVG Balloon 3 -->
-  <svg class="balloon balloon-3" viewBox="0 0 50 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="25" cy="28" rx="20" ry="25" fill="url(#balloonGrad3)"/>
-    <path d="M25 53 L22 57 L28 57 Z" fill="#8b5cf6"/>
-    <path d="M25 57 Q27 62 23 70" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" fill="none"/>
-    <defs>
-      <radialGradient id="balloonGrad3" cx="35%" cy="30%" r="65%">
-        <stop offset="0%" stop-color="#c084fc"/>
-        <stop offset="100%" stop-color="#6d28d9"/>
-      </radialGradient>
-    </defs>
-  </svg>
-  <!-- SVG Balloon 4 -->
-  <svg class="balloon balloon-4" viewBox="0 0 50 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="25" cy="28" rx="20" ry="25" fill="url(#balloonGrad1)"/>
-    <path d="M25 53 L22 57 L28 57 Z" fill="#ec4899"/>
-    <path d="M25 57 Q23 63 27 70" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" fill="none"/>
-  </svg>
-</div>
+  <!-- Globos Flotantes en Fondo -->
+  <div class="floating-balloons-container">
+    <!-- SVG Balloon 1 -->
+    <svg class="balloon balloon-1" viewBox="0 0 50 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="25" cy="28" rx="20" ry="25" fill="url(#balloonGrad1)" />
+      <path d="M25 53 L22 57 L28 57 Z" fill="#ec4899" />
+      <path d="M25 57 Q28 64 22 70" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" fill="none" />
+      <defs>
+        <radialGradient id="balloonGrad1" cx="35%" cy="30%" r="65%">
+          <stop offset="0%" stop-color="#f472b6" />
+          <stop offset="100%" stop-color="#be185d" />
+        </radialGradient>
+      </defs>
+    </svg>
+    <!-- SVG Balloon 2 -->
+    <svg class="balloon balloon-2" viewBox="0 0 50 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="25" cy="28" rx="20" ry="25" fill="url(#balloonGrad2)" />
+      <path d="M25 53 L22 57 L28 57 Z" fill="#fbbf24" />
+      <path d="M25 57 Q20 63 26 70" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" fill="none" />
+      <defs>
+        <radialGradient id="balloonGrad2" cx="35%" cy="30%" r="65%">
+          <stop offset="0%" stop-color="#fef08a" />
+          <stop offset="100%" stop-color="#d97706" />
+        </radialGradient>
+      </defs>
+    </svg>
+    <!-- SVG Balloon 3 -->
+    <svg class="balloon balloon-3" viewBox="0 0 50 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="25" cy="28" rx="20" ry="25" fill="url(#balloonGrad3)" />
+      <path d="M25 53 L22 57 L28 57 Z" fill="#8b5cf6" />
+      <path d="M25 57 Q27 62 23 70" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" fill="none" />
+      <defs>
+        <radialGradient id="balloonGrad3" cx="35%" cy="30%" r="65%">
+          <stop offset="0%" stop-color="#c084fc" />
+          <stop offset="100%" stop-color="#6d28d9" />
+        </radialGradient>
+      </defs>
+    </svg>
+    <!-- SVG Balloon 4 -->
+    <svg class="balloon balloon-4" viewBox="0 0 50 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="25" cy="28" rx="20" ry="25" fill="url(#balloonGrad1)" />
+      <path d="M25 53 L22 57 L28 57 Z" fill="#ec4899" />
+      <path d="M25 57 Q23 63 27 70" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" fill="none" />
+    </svg>
+  </div>
 
-<!-- Canvas para EFECTOS (Partículas, Confeti y Chispas al tocar) -->
-<canvas id="particlesCanvas"></canvas>
-<canvas id="sparkleCanvas"></canvas>
-<canvas id="confettiCanvas"></canvas>
+  <!-- Canvas para EFECTOS (Partículas, Confeti y Chispas al tocar) -->
+  <canvas id="particlesCanvas"></canvas>
+  <canvas id="sparkleCanvas"></canvas>
+  <canvas id="confettiCanvas"></canvas>
 
-<!-- Control de Música Flotante Accesible -->
-<button class="music-toggle" id="musicBtn" aria-label="Activar o desactivar música">
-  <svg id="musicIconOff" viewBox="0 0 24 24">
-    <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73 4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
-  </svg>
-  <svg id="musicIconOn" viewBox="0 0 24 24" style="display: none;">
-    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-  </svg>
-</button>
-<audio id="bgAudio" loop preload="auto">
-  <source src="musica.mp3" type="audio/mpeg">
-</audio>
+  <!-- Control de Música Flotante Accesible -->
+  <button class="music-toggle" id="musicBtn" aria-label="Activar o desactivar música">
+    <svg id="musicIconOff" viewBox="0 0 24 24">
+      <path
+        d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73 4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
+    </svg>
+    <svg id="musicIconOn" viewBox="0 0 24 24" style="display: none;">
+      <path
+        d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+    </svg>
+  </button>
+  <audio id="bgAudio" loop preload="auto">
+    <source src="fc.mp3" type="audio/mpeg">
+  </audio>
 
-<!-- Contenedor Principal Mobile-First -->
-<main class="app-container">
+  <!-- Contenedor Principal Mobile-First -->
+  <main class="app-container">
 
-  <!-- 1. PORTADA HERO -->
-  <section class="hero-section" id="hero">
-    <div class="badge-invite">¡ESTÁS INVITADO!</div>
-    <div class="hero-title-wrapper">
-      <span class="sparkle-icon sparkle-1">✦</span>
-      <span class="sparkle-icon sparkle-2">✦</span>
-      <h1 class="hero-title-name">GABI</h1>
-    </div>
+    <!-- 1. PORTADA HERO -->
+    <section class="hero-section" id="hero">
+      <div class="badge-invite">¡ESTÁS INVITADO!</div>
 
-    <div class="number-18-container">
-      <div class="number-glow-ring"></div>
-      <div class="number-18">18</div>
-    </div>
-
-    <div class="hero-subtitle">¡Mis 18 años!</div>
-
-    <p class="hero-message">
-      Una noche especial merece personas especiales. ¡Quiero celebrar contigo el inicio de esta gran etapa!
-    </p>
-
-    <button class="btn-neon" id="btnOpenInvite">
-      <span>ABRIR INVITACIÓN</span>
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-      </svg>
-    </button>
-  </section>
-
-  <!-- CONTENIDO REVELADO AL PULSAR EL BOTÓN -->
-  <div class="main-content" id="mainContent">
-
-    <!-- 2. INFORMACIÓN DEL EVENTO -->
-    <section class="info-section">
-      <div class="section-header">
-        <h2 class="section-title">¡CELEBREMOS JUNTOS!</h2>
+      <div class="hero-title-wrapper">
+        <span class="sparkle-icon sparkle-1">✦</span>
+        <span class="sparkle-icon sparkle-2">✦</span>
+        <h1 class="hero-title-name">GABI</h1>
       </div>
 
-      <div class="cards-grid">
-        <!-- Fecha -->
-        <article class="info-card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24">
-              <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5z"/>
-            </svg>
-          </div>
-          <div class="card-label">FECHA</div>
-          <div class="card-value">Sábado 7</div>
-          <span class="btn-card-action">¡Guarda el día!</span>
-        </article>
 
-        <!-- Lugar -->
-        <article class="info-card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24">
-              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-            </svg>
-          </div>
-          <div class="card-label">UBICACIÓN</div>
-          <div class="card-value">Casa Magi</div>
-          <a href="https://maps.app.goo.gl/1jHTnaegU6UTaGLz6" target="_blank" rel="noopener noreferrer" class="btn-card-action">
-            <span>Cómo llegar</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"/>
-            </svg>
-          </a>
-        </article>
 
-        <!-- Hora -->
-        <article class="info-card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24">
-              <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
-            </svg>
-          </div>
-          <div class="card-label">HORA</div>
-          <div class="card-value">14:00 HRS</div>
-          <span class="btn-card-action">¡Sé puntual!</span>
-        </article>
-      </div>
-    </section>
-
-    <!-- 3. SOBRE VIRTUAL DE REGALO -->
-    <section class="envelope-section">
-      <div class="envelope-intro">
-        <h2 class="section-title">REGALO ESPECIAL</h2>
-        <p class="hero-message" style="margin-top: 0.5rem; margin-bottom: 0;">
-          Tu presencia es mi mejor regalo, pero si deseas tener un detalle conmigo, aquí tienes mi sobre virtual.
-        </p>
+      <div class="number-18-container">
+        <div class="number-glow-ring"></div>
+        <div class="number-18">18</div>
       </div>
 
-      <div class="envelope-wrapper" id="envelopeWrapper">
-        <div class="envelope-flap"></div>
-        <div class="envelope-seal" id="envelopeSeal">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-          </svg>
-        </div>
-        <div class="envelope-body"></div>
 
-        <div class="envelope-card">
-          <div class="card-content-inner">
-            <div style="color: var(--gold-accent); font-weight: 700; font-size: 0.95rem;">
-              Un detalle para Gabi 🎁
-            </div>
-            <p class="card-text">
-              ¡Gracias por ser parte de este momento tan importante en mi vida!
-            </p>
-            <button class="btn-gift-small" id="btnOpenGiftModal">
-              Enviar regalo
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- 4. MENSAJE FINAL Y DESPEDIDA -->
-    <footer class="footer-section">
-      <div class="footer-quote">
-        "¡Cumplir 18 es comenzar una nueva aventura!"
-      </div>
-      <p class="footer-sub">
-        Espero compartir este día tan especial contigo. ¡No faltes!
+
+
+      <p class="hero-message">
+        Una noche especial merece personas especiales. ¡Quiero celebrar contigo el inicio de esta gran etapa!
       </p>
-      <div class="footer-signature">
-        Con cariño, GABI ❤️
-      </div>
-    </footer>
+      <div class="hero-subtitle">!Mis 18 años!</div>
 
-  </div>
+      <button class="btn-neon" id="btnOpenInvite">
+        <span>ABRIR INVITACIÓN</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
+        </svg>
+      </button>
+    </section>
 
-</main>
+    <!-- CONTENIDO REVELADO AL PULSAR EL BOTÓN -->
+    <div class="main-content" id="mainContent">
 
-<!-- MODAL DATOS DE TRANSFERENCIA BANCARIA -->
-<div class="modal-overlay" id="giftModal">
-  <div class="modal-box">
-    <button class="modal-close" id="btnCloseModal">&times;</button>
-    <h3 class="modal-title">DATOS DE TRANSFERENCIA</h3>
+      <!-- 2. INFORMACIÓN DEL EVENTO -->
+      <section class="info-section">
+        <div class="section-header">
+          <h2 class="section-title">¡CELEBREMOS JUNTOS!</h2>
+        </div>
 
-    <div class="bank-details-list">
-      <div class="bank-item">
-        <span class="bank-label">BANCO</span>
-        <span class="bank-val" id="valBanco">CONFIGURAR BANCO</span>
-      </div>
-      <div class="bank-item">
-        <span class="bank-label">TIPO DE CUENTA</span>
-        <span class="bank-val" id="valTipo">CONFIGURAR TIPO CUENTA</span>
-      </div>
-      <div class="bank-item">
-        <span class="bank-label">NÚMERO DE CUENTA</span>
-        <span class="bank-val" id="valCuenta">0000 0000 0000 0000</span>
-      </div>
-      <div class="bank-item">
-        <span class="bank-label">TITULAR</span>
-        <span class="bank-val" id="valTitular">GABI</span>
-      </div>
-      <div class="bank-item">
-        <span class="bank-label">DOCUMENTO / RUT</span>
-        <span class="bank-val" id="valDocumento">CONFIGURAR DOCUMENTO</span>
-      </div>
+        <div class="cards-grid">
+          <!-- Fecha -->
+          <article class="info-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5z" />
+              </svg>
+            </div>
+            <div class="card-label">FECHA</div>
+            <div class="card-value">Sábado 7</div>
+            <span class="btn-card-action">¡Guarda el día!</span>
+          </article>
+
+          <!-- Lugar -->
+          <article class="info-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+              </svg>
+            </div>
+            <div class="card-label">UBICACIÓN</div>
+            <div class="card-value">Casa Magi</div>
+            <a href="https://maps.app.goo.gl/1jHTnaegU6UTaGLz6" target="_blank" rel="noopener noreferrer"
+              class="btn-card-action">
+              <span>Cómo llegar</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z" />
+              </svg>
+            </a>
+          </article>
+
+          <!-- Hora -->
+          <article class="info-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
+              </svg>
+            </div>
+            <div class="card-label">HORA</div>
+            <div class="card-value">16:00 HRS</div>
+            <span class="btn-card-action">¡Sé puntual!</span>
+          </article>
+        </div>
+      </section>
+
+      <!-- 3. SOBRE VIRTUAL DE REGALO -->
+      <section class="envelope-section">
+        <div class="envelope-intro">
+          <h2 class="section-title">REGALO ESPECIAL</h2>
+          <p class="hero-message" style="margin-top: 0.5rem; margin-bottom: 0;">
+            Tu presencia es mi mejor regalo, pero si deseas tener un detalle conmigo, aquí tienes mi sobre virtual.
+          </p>
+        </div>
+
+        <div class="envelope-wrapper" id="envelopeWrapper">
+          <div class="envelope-flap"></div>
+          <div class="envelope-seal" id="envelopeSeal">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+          </div>
+          <div class="envelope-body"></div>
+
+          <div class="envelope-card">
+            <div class="card-content-inner">
+              <div style="color: var(--gold-accent); font-weight: 700; font-size: 0.95rem;">
+                Un detalle para Gabi 🎁
+              </div>
+              <p class="card-text">
+                ¡Gracias por ser parte de este momento tan importante en mi vida!
+              </p>
+              <button class="btn-gift-small" id="btnOpenGiftModal">
+                Enviar regalo
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. MENSAJE FINAL Y DESPEDIDA -->
+      <footer class="footer-section">
+        <div class="footer-quote">
+          "¡Cumplir 18 es comenzar una nueva aventura!"
+        </div>
+        <p class="footer-sub">
+          Espero compartir este día tan especial contigo. ¡No faltes!
+        </p>
+        <div class="footer-signature">
+          Con cariño, GABI ❤️
+        </div>
+      </footer>
+
     </div>
 
-    <button class="btn-neon" id="btnCopyData" style="font-size: 0.8rem; min-height: 40px;">
-      COPIAR DATOS
-    </button>
-    <div class="copy-feedback" id="copyFeedback">¡Datos copiados al portapapeles!</div>
+  </main>
+
+  <!-- MODAL DATOS DE TRANSFERENCIA BANCARIA -->
+  <div class="modal-overlay" id="giftModal">
+    <div class="modal-box">
+      <button class="modal-close" id="btnCloseModal">&times;</button>
+      <h3 class="modal-title">DATOS DE TRANSFERENCIA</h3>
+
+      <div class="bank-details-list">
+        <div class="bank-item">
+          <span class="bank-label">BANCO</span>
+          <span class="bank-val" id="valBanco">CONFIGURAR BANCO</span>
+        </div>
+        <div class="bank-item">
+          <span class="bank-label">TIPO DE CUENTA</span>
+          <span class="bank-val" id="valTipo">CONFIGURAR TIPO CUENTA</span>
+        </div>
+        <div class="bank-item">
+          <span class="bank-label">NÚMERO DE CUENTA</span>
+          <span class="bank-val" id="valCuenta">0000 0000 0000 0000</span>
+        </div>
+        <div class="bank-item">
+          <span class="bank-label">TITULAR</span>
+          <span class="bank-val" id="valTitular">GABI</span>
+        </div>
+        <div class="bank-item">
+          <span class="bank-label">DOCUMENTO / CI</span>
+          <span class="bank-val" id="valDocumento">CONFIGURAR DOCUMENTO</span>
+        </div>
+      </div>
+
+      <button class="btn-neon" id="btnCopyData" style="font-size: 0.8rem; min-height: 40px;">
+        COPIAR DATOS
+      </button>
+      <div class="copy-feedback" id="copyFeedback">¡Datos copiados al portapapeles!</div>
+    </div>
   </div>
-</div>
 
-<!-- SCRIPT JS COMPLETO -->
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
+  <!-- SCRIPT JS COMPLETO -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
 
-    // ==========================================
-    // CONFIGURACIÓN EDITABLE DE DATOS BANCARIOS
-    // ==========================================
-    const DATOS_REGALO = {
-      banco: "Nombre de tu Banco",
-      tipoCuenta: "Cuenta Vista / Ahorro",
-      numeroCuenta: "1234567890",
-      titular: "Gabi",
-      documento: "12.345.678-9"
-    };
+      // ==========================================
+      // CONFIGURACIÓN EDITABLE DE DATOS BANCARIOS
+      // ==========================================
+      const DATOS_REGALO = {
+        banco: "Produbanco",
+        tipoCuenta: "Ahorros",
+        numeroCuenta: "20003948534",
+        titular: "Gabriela Masabanda Barrera",
+        documento: "1728080910"
+      };
 
-    // Inyectar datos en modal
-    document.getElementById('valBanco').textContent = DATOS_REGALO.banco;
-    document.getElementById('valTipo').textContent = DATOS_REGALO.tipoCuenta;
-    document.getElementById('valCuenta').textContent = DATOS_REGALO.numeroCuenta;
-    document.getElementById('valTitular').textContent = DATOS_REGALO.titular;
-    document.getElementById('valDocumento').textContent = DATOS_REGALO.documento;
+      // Inyectar datos en modal
+      document.getElementById('valBanco').textContent = DATOS_REGALO.banco;
+      document.getElementById('valTipo').textContent = DATOS_REGALO.tipoCuenta;
+      document.getElementById('valCuenta').textContent = DATOS_REGALO.numeroCuenta;
+      document.getElementById('valTitular').textContent = DATOS_REGALO.titular;
+      document.getElementById('valDocumento').textContent = DATOS_REGALO.documento;
 
-    // ==========================================
-    // LOGICA REVELADO DE INVITACIÓN
-    // ==========================================
-    const btnOpenInvite = document.getElementById('btnOpenInvite');
-    const mainContent = document.getElementById('mainContent');
-    const musicBtn = document.getElementById('musicBtn');
-    const bgAudio = document.getElementById('bgAudio');
-    const musicIconOff = document.getElementById('musicIconOff');
-    const musicIconOn = document.getElementById('musicIconOn');
+      // ==========================================
+      // LOGICA REVELADO DE INVITACIÓN
+      // ==========================================
+      const btnOpenInvite = document.getElementById('btnOpenInvite');
+      const mainContent = document.getElementById('mainContent');
+      const musicBtn = document.getElementById('musicBtn');
+      const bgAudio = document.getElementById('bgAudio');
+      const musicIconOff = document.getElementById('musicIconOff');
+      const musicIconOn = document.getElementById('musicIconOn');
 
-    let musicPlaying = false;
+      let musicPlaying = false;
 
-    btnOpenInvite.addEventListener('click', () => {
-      mainContent.classList.add('revealed');
-      musicBtn.classList.add('visible');
+      btnOpenInvite.addEventListener('click', () => {
+        mainContent.classList.add('revealed');
+        musicBtn.classList.add('visible');
 
-      // Desplazamiento suave al contenido
-      setTimeout(() => {
-        mainContent.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
+        // Desplazamiento suave al contenido
+        setTimeout(() => {
+          mainContent.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
 
-      // Lanzar ráfaga de confeti de celebración
-      launchConfettiBurst();
-
-      // Intentar iniciar audio
-      toggleAudio(true);
-    });
-
-    // ==========================================
-    // CONTROL DE AUDIO
-    // ==========================================
-    function toggleAudio(forcePlay = false) {
-      if (forcePlay || !musicPlaying) {
-        bgAudio.play().then(() => {
-          musicPlaying = true;
-          musicBtn.classList.add('playing');
-          musicIconOff.style.display = 'none';
-          musicIconOn.style.display = 'block';
-        }).catch(err => {
-          console.log("Autoplay bloqueado por navegador:", err);
-        });
-      } else {
-        bgAudio.pause();
-        musicPlaying = false;
-        musicBtn.classList.remove('playing');
-        musicIconOff.style.display = 'block';
-        musicIconOn.style.display = 'none';
-      }
-    }
-
-    musicBtn.addEventListener('click', () => toggleAudio());
-
-    // ==========================================
-    // INTERACCIÓN SOBRE VIRTUAL
-    // ==========================================
-    const envelopeWrapper = document.getElementById('envelopeWrapper');
-    const btnOpenGiftModal = document.getElementById('btnOpenGiftModal');
-    const giftModal = document.getElementById('giftModal');
-    const btnCloseModal = document.getElementById('btnCloseModal');
-    const btnCopyData = document.getElementById('btnCopyData');
-    const copyFeedback = document.getElementById('copyFeedback');
-
-    envelopeWrapper.addEventListener('click', (e) => {
-      if (!envelopeWrapper.classList.contains('open')) {
-        envelopeWrapper.classList.add('open');
+        // Lanzar ráfaga de confeti de celebración
         launchConfettiBurst();
-      }
-    });
 
-    btnOpenGiftModal.addEventListener('click', (e) => {
-      e.stopPropagation();
-      giftModal.classList.add('active');
-    });
-
-    btnCloseModal.addEventListener('click', () => {
-      giftModal.classList.remove('active');
-    });
-
-    giftModal.addEventListener('click', (e) => {
-      if (e.target === giftModal) giftModal.classList.remove('active');
-    });
-
-    // Copiar Datos al Portapapeles
-    btnCopyData.addEventListener('click', () => {
-      const textToCopy = `DATOS DE TRANSFERENCIA DE GABI:\nBanco: ${DATOS_REGALO.banco}\nTipo: ${DATOS_REGALO.tipoCuenta}\nCuenta: ${DATOS_REGALO.numeroCuenta}\nTitular: ${DATOS_REGALO.titular}\nDocumento: ${DATOS_REGALO.documento}`;
-
-      const textArea = document.createElement("textarea");
-      textArea.value = textToCopy;
-      document.body.appendChild(textArea);
-      textArea.select();
-      try {
-        document.execCommand('copy');
-        copyFeedback.classList.add('show');
-        setTimeout(() => copyFeedback.classList.remove('show'), 2500);
-      } catch (err) {
-        console.error('Error al copiar: ', err);
-      }
-      document.body.removeChild(textArea);
-    });
-
-    // ==========================================
-    // SISTEMA DE PARTÍCULAS LUMINOSAS
-    // ==========================================
-    const canvasPart = document.getElementById('particlesCanvas');
-    const ctxPart = canvasPart.getContext('2d');
-    let particlesArray = [];
-
-    function resizePartCanvas() {
-      canvasPart.width = window.innerWidth;
-      canvasPart.height = window.innerHeight;
-    }
-    resizePartCanvas();
-    window.addEventListener('resize', resizePartCanvas);
-
-    class Particle {
-      constructor() {
-        this.reset();
-      }
-      reset() {
-        this.x = Math.random() * canvasPart.width;
-        this.y = Math.random() * canvasPart.height;
-        this.size = Math.random() * 2.5 + 0.5;
-        this.speedY = Math.random() * 0.4 + 0.1;
-        this.speedX = (Math.random() - 0.5) * 0.3;
-        this.opacity = Math.random() * 0.6 + 0.2;
-        this.color = Math.random() > 0.5 ? '#ec4899' : (Math.random() > 0.5 ? '#fbbf24' : '#8b5cf6');
-      }
-      update() {
-        this.y -= this.speedY;
-        this.x += this.speedX;
-        if (this.y < 0) this.reset();
-      }
-      draw() {
-        ctxPart.beginPath();
-        ctxPart.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctxPart.fillStyle = this.color;
-        ctxPart.globalAlpha = this.opacity;
-        ctxPart.shadowBlur = 8;
-        ctxPart.shadowColor = this.color;
-        ctxPart.fill();
-      }
-    }
-
-    for (let i = 0; i < 45; i++) {
-      particlesArray.push(new Particle());
-    }
-
-    function animateParticles() {
-      ctxPart.clearRect(0, 0, canvasPart.width, canvasPart.height);
-      particlesArray.forEach(p => {
-        p.update();
-        p.draw();
+        // Intentar iniciar audio tras interacción directa del usuario
+        toggleAudio(true);
       });
-      requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
 
-    // ==========================================
-    // CHISPAS AL TOCAR/MOVER DEDO O CURSOR
-    // ==========================================
-    const sparkCanvas = document.getElementById('sparkleCanvas');
-    const sparkCtx = sparkCanvas.getContext('2d');
-    let sparkles = [];
+      // ==========================================
+      // CONTROL DE AUDIO
+      // ==========================================
+      function toggleAudio(forcePlay = false) {
+        if (forcePlay || !musicPlaying) {
+          // Cargar explícitamente si aún no ha iniciado la carga
+          if (bgAudio.readyState === 0) {
+            bgAudio.load();
+          }
+          const playPromise = bgAudio.play();
 
-    function resizeSparkCanvas() {
-      sparkCanvas.width = window.innerWidth;
-      sparkCanvas.height = window.innerHeight;
-    }
-    resizeSparkCanvas();
-    window.addEventListener('resize', resizeSparkCanvas);
-
-    function addSparkle(x, y) {
-      for (let i = 0; i < 3; i++) {
-        sparkles.push({
-          x: x,
-          y: y,
-          vx: (Math.random() - 0.5) * 4,
-          vy: (Math.random() - 0.5) * 4,
-          size: Math.random() * 3 + 1,
-          color: Math.random() > 0.5 ? '#fbbf24' : '#ec4899',
-          life: 1
-        });
-      }
-    }
-
-    window.addEventListener('mousemove', (e) => addSparkle(e.clientX, e.clientY));
-    window.addEventListener('touchmove', (e) => {
-      if (e.touches[0]) addSparkle(e.touches[0].clientX, e.touches[0].clientY);
-    });
-
-    function animateSparkles() {
-      sparkCtx.clearRect(0, 0, sparkCanvas.width, sparkCanvas.height);
-      for (let i = sparkles.length - 1; i >= 0; i--) {
-        let s = sparkles[i];
-        s.x += s.vx;
-        s.y += s.vy;
-        s.life -= 0.04;
-        if (s.life <= 0) {
-          sparkles.splice(i, 1);
+          if (playPromise !== undefined) {
+            playPromise.then(() => {
+              musicPlaying = true;
+              musicBtn.classList.add('playing');
+              musicIconOff.style.display = 'none';
+              musicIconOn.style.display = 'block';
+            }).catch(err => {
+              console.log("No se pudo iniciar el audio automáticamente:", err);
+            });
+          }
         } else {
-          sparkCtx.beginPath();
-          sparkCtx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-          sparkCtx.fillStyle = s.color;
-          sparkCtx.globalAlpha = s.life;
-          sparkCtx.shadowBlur = 6;
-          sparkCtx.shadowColor = s.color;
-          sparkCtx.fill();
+          bgAudio.pause();
+          musicPlaying = false;
+          musicBtn.classList.remove('playing');
+          musicIconOff.style.display = 'block';
+          musicIconOn.style.display = 'none';
         }
       }
-      requestAnimationFrame(animateSparkles);
-    }
-    animateSparkles();
 
-    // ==========================================
-    // MOTOR DE CONFETI NATIVO
-    // ==========================================
-    const confettiCanvas = document.getElementById('confettiCanvas');
-    const ctxConfetti = confettiCanvas.getContext('2d');
-    let confettiPieces = [];
+      musicBtn.addEventListener('click', () => toggleAudio());
 
-    function resizeConfettiCanvas() {
-      confettiCanvas.width = window.innerWidth;
-      confettiCanvas.height = window.innerHeight;
-    }
-    resizeConfettiCanvas();
-    window.addEventListener('resize', resizeConfettiCanvas);
+      // ==========================================
+      // INTERACCIÓN SOBRE VIRTUAL
+      // ==========================================
+      const envelopeWrapper = document.getElementById('envelopeWrapper');
+      const btnOpenGiftModal = document.getElementById('btnOpenGiftModal');
+      const giftModal = document.getElementById('giftModal');
+      const btnCloseModal = document.getElementById('btnCloseModal');
+      const btnCopyData = document.getElementById('btnCopyData');
+      const copyFeedback = document.getElementById('copyFeedback');
 
-    class ConfettiPiece {
-      constructor() {
-        this.x = Math.random() * confettiCanvas.width;
-        this.y = -20;
-        this.size = Math.random() * 8 + 4;
-        this.speedY = Math.random() * 4 + 2;
-        this.speedX = (Math.random() - 0.5) * 3;
-        this.rotation = Math.random() * 360;
-        this.rotSpeed = (Math.random() - 0.5) * 10;
-        const colors = ['#ec4899', '#8b5cf6', '#fbbf24', '#fef08a', '#38bdf8'];
-        this.color = colors[Math.floor(Math.random() * colors.length)];
-      }
-      update() {
-        this.y += this.speedY;
-        this.x += this.speedX;
-        this.rotation += this.rotSpeed;
-      }
-      draw() {
-        ctxConfetti.save();
-        ctxConfetti.translate(this.x, this.y);
-        ctxConfetti.rotate((this.rotation * Math.PI) / 180);
-        ctxConfetti.fillStyle = this.color;
-        ctxConfetti.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
-        ctxConfetti.restore();
-      }
-    }
-
-    function launchConfettiBurst() {
-      for (let i = 0; i < 90; i++) {
-        confettiPieces.push(new ConfettiPiece());
-      }
-    }
-
-    function animateConfetti() {
-      ctxConfetti.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-      confettiPieces.forEach((c, index) => {
-        c.update();
-        c.draw();
-        if (c.y > confettiCanvas.height) {
-          confettiPieces.splice(index, 1);
+      envelopeWrapper.addEventListener('click', (e) => {
+        if (!envelopeWrapper.classList.contains('open')) {
+          envelopeWrapper.classList.add('open');
+          launchConfettiBurst();
         }
       });
-      requestAnimationFrame(animateConfetti);
-    }
-    animateConfetti();
 
-  });
-</script>
+      btnOpenGiftModal.addEventListener('click', (e) => {
+        e.stopPropagation();
+        giftModal.classList.add('active');
+      });
+
+      btnCloseModal.addEventListener('click', () => {
+        giftModal.classList.remove('active');
+      });
+
+      giftModal.addEventListener('click', (e) => {
+        if (e.target === giftModal) giftModal.classList.remove('active');
+      });
+
+      // Copiar Datos al Portapapeles
+      btnCopyData.addEventListener('click', () => {
+        const textToCopy = `DATOS DE TRANSFERENCIA DE GABI:\nBanco: ${DATOS_REGALO.banco}\nTipo: ${DATOS_REGALO.tipoCuenta}\nCuenta: ${DATOS_REGALO.numeroCuenta}\nTitular: ${DATOS_REGALO.titular}\nDocumento: ${DATOS_REGALO.documento}`;
+
+        const textArea = document.createElement("textarea");
+        textArea.value = textToCopy;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+          document.execCommand('copy');
+          copyFeedback.classList.add('show');
+          setTimeout(() => copyFeedback.classList.remove('show'), 2500);
+        } catch (err) {
+          console.error('Error al copiar: ', err);
+        }
+        document.body.removeChild(textArea);
+      });
+
+      // ==========================================
+      // SISTEMA DE PARTÍCULAS LUMINOSAS
+      // ==========================================
+      const canvasPart = document.getElementById('particlesCanvas');
+      const ctxPart = canvasPart.getContext('2d');
+      let particlesArray = [];
+
+      function resizePartCanvas() {
+        canvasPart.width = window.innerWidth;
+        canvasPart.height = window.innerHeight;
+      }
+      resizePartCanvas();
+      window.addEventListener('resize', resizePartCanvas);
+
+      class Particle {
+        constructor() {
+          this.reset();
+        }
+        reset() {
+          this.x = Math.random() * canvasPart.width;
+          this.y = Math.random() * canvasPart.height;
+          this.size = Math.random() * 2.5 + 0.5;
+          this.speedY = Math.random() * 0.4 + 0.1;
+          this.speedX = (Math.random() - 0.5) * 0.3;
+          this.opacity = Math.random() * 0.6 + 0.2;
+          this.color = Math.random() > 0.5 ? '#ec4899' : (Math.random() > 0.5 ? '#fbbf24' : '#8b5cf6');
+        }
+        update() {
+          this.y -= this.speedY;
+          this.x += this.speedX;
+          if (this.y < 0) this.reset();
+        }
+        draw() {
+          ctxPart.beginPath();
+          ctxPart.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctxPart.fillStyle = this.color;
+          ctxPart.globalAlpha = this.opacity;
+          ctxPart.shadowBlur = 8;
+          ctxPart.shadowColor = this.color;
+          ctxPart.fill();
+        }
+      }
+
+      for (let i = 0; i < 45; i++) {
+        particlesArray.push(new Particle());
+      }
+
+      function animateParticles() {
+        ctxPart.clearRect(0, 0, canvasPart.width, canvasPart.height);
+        particlesArray.forEach(p => {
+          p.update();
+          p.draw();
+        });
+        requestAnimationFrame(animateParticles);
+      }
+      animateParticles();
+
+      // ==========================================
+      // CHISPAS AL TOCAR/MOVER DEDO O CURSOR
+      // ==========================================
+      const sparkCanvas = document.getElementById('sparkleCanvas');
+      const sparkCtx = sparkCanvas.getContext('2d');
+      let sparkles = [];
+
+      function resizeSparkCanvas() {
+        sparkCanvas.width = window.innerWidth;
+        sparkCanvas.height = window.innerHeight;
+      }
+      resizeSparkCanvas();
+      window.addEventListener('resize', resizeSparkCanvas);
+
+      function addSparkle(x, y) {
+        for (let i = 0; i < 3; i++) {
+          sparkles.push({
+            x: x,
+            y: y,
+            vx: (Math.random() - 0.5) * 4,
+            vy: (Math.random() - 0.5) * 4,
+            size: Math.random() * 3 + 1,
+            color: Math.random() > 0.5 ? '#fbbf24' : '#ec4899',
+            life: 1
+          });
+        }
+      }
+
+      window.addEventListener('mousemove', (e) => addSparkle(e.clientX, e.clientY));
+      window.addEventListener('touchmove', (e) => {
+        if (e.touches[0]) addSparkle(e.touches[0].clientX, e.touches[0].clientY);
+      });
+
+      function animateSparkles() {
+        sparkCtx.clearRect(0, 0, sparkCanvas.width, sparkCanvas.height);
+        for (let i = sparkles.length - 1; i >= 0; i--) {
+          let s = sparkles[i];
+          s.x += s.vx;
+          s.y += s.vy;
+          s.life -= 0.04;
+          if (s.life <= 0) {
+            sparkles.splice(i, 1);
+          } else {
+            sparkCtx.beginPath();
+            sparkCtx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+            sparkCtx.fillStyle = s.color;
+            sparkCtx.globalAlpha = s.life;
+            sparkCtx.shadowBlur = 6;
+            sparkCtx.shadowColor = s.color;
+            sparkCtx.fill();
+          }
+        }
+        requestAnimationFrame(animateSparkles);
+      }
+      animateSparkles();
+
+      // ==========================================
+      // MOTOR DE CONFETI NATIVO
+      // ==========================================
+      const confettiCanvas = document.getElementById('confettiCanvas');
+      const ctxConfetti = confettiCanvas.getContext('2d');
+      let confettiPieces = [];
+
+      function resizeConfettiCanvas() {
+        confettiCanvas.width = window.innerWidth;
+        confettiCanvas.height = window.innerHeight;
+      }
+      resizeConfettiCanvas();
+      window.addEventListener('resize', resizeConfettiCanvas);
+
+      class ConfettiPiece {
+        constructor() {
+          this.x = Math.random() * confettiCanvas.width;
+          this.y = -20;
+          this.size = Math.random() * 8 + 4;
+          this.speedY = Math.random() * 4 + 2;
+          this.speedX = (Math.random() - 0.5) * 3;
+          this.rotation = Math.random() * 360;
+          this.rotSpeed = (Math.random() - 0.5) * 10;
+          const colors = ['#ec4899', '#8b5cf6', '#fbbf24', '#fef08a', '#38bdf8'];
+          this.color = colors[Math.floor(Math.random() * colors.length)];
+        }
+        update() {
+          this.y += this.speedY;
+          this.x += this.speedX;
+          this.rotation += this.rotSpeed;
+        }
+        draw() {
+          ctxConfetti.save();
+          ctxConfetti.translate(this.x, this.y);
+          ctxConfetti.rotate((this.rotation * Math.PI) / 180);
+          ctxConfetti.fillStyle = this.color;
+          ctxConfetti.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
+          ctxConfetti.restore();
+        }
+      }
+
+      function launchConfettiBurst() {
+        for (let i = 0; i < 90; i++) {
+          confettiPieces.push(new ConfettiPiece());
+        }
+      }
+
+      function animateConfetti() {
+        ctxConfetti.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+        confettiPieces.forEach((c, index) => {
+          c.update();
+          c.draw();
+          if (c.y > confettiCanvas.height) {
+            confettiPieces.splice(index, 1);
+          }
+        });
+        requestAnimationFrame(animateConfetti);
+      }
+      animateConfetti();
+
+    });
+  </script>
 </body>
+
 </html>
