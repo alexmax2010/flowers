@@ -696,6 +696,19 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.5);
     }
 
+    .card-content-inner {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: none;
+    }
+
     .card-text {
       font-size: 0.85rem;
       color: var(--text-muted);
@@ -736,6 +749,12 @@
     .envelope-wrapper.open .envelope-card {
       transform: translateY(-105px);
       z-index: 4;
+    }
+
+    .envelope-wrapper.open .card-content-inner {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
     }
 
     /* ==========================================================================
@@ -1108,15 +1127,17 @@
         <div class="envelope-body"></div>
 
         <div class="envelope-card">
-          <div style="color: var(--gold-accent); font-weight: 700; font-size: 0.95rem;">
-            Un detalle para Gabi 🎁
+          <div class="card-content-inner">
+            <div style="color: var(--gold-accent); font-weight: 700; font-size: 0.95rem;">
+              Un detalle para Gabi 🎁
+            </div>
+            <p class="card-text">
+              ¡Gracias por ser parte de este momento tan importante en mi vida!
+            </p>
+            <button class="btn-gift-small" id="btnOpenGiftModal">
+              Enviar regalo
+            </button>
           </div>
-          <p class="card-text">
-            ¡Gracias por ser parte de este momento tan importante en mi vida!
-          </p>
-          <button class="btn-gift-small" id="btnOpenGiftModal">
-            Enviar regalo
-          </button>
         </div>
       </div>
     </section>
