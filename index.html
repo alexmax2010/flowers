@@ -1353,7 +1353,7 @@
 
       <!-- 3. SOBRE VIRTUAL DE REGALO -->
       <section class="envelope-section">
-        <div class="envelope-intro">
+        <div class="envelope-intro" id="regaloEspecial" style="scroll-margin-top: 1.5rem;">
           <h2 class="section-title">REGALO ESPECIAL</h2>
           <p class="hero-message" style="margin-top: 0.5rem; margin-bottom: 0;">
             Tu presencia es mi mejor regalo, pero si deseas tener un detalle conmigo, aquí tienes mi sobre virtual.
@@ -1532,10 +1532,19 @@
       const copyFeedback = document.getElementById('copyFeedback');
 
       envelopeWrapper.addEventListener('click', (e) => {
-        if (!envelopeWrapper.classList.contains('open')) {
+        const wasClosed = !envelopeWrapper.classList.contains('open');
+        if (wasClosed) {
           envelopeWrapper.classList.add('open');
           launchConfettiBurst();
         }
+
+        // Desplazamiento suave hasta el encabezado REGALO ESPECIAL
+        setTimeout(() => {
+          const seccionRegalo = document.getElementById('regaloEspecial');
+          if (seccionRegalo) {
+            seccionRegalo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 150);
       });
 
       btnOpenGiftModal.addEventListener('click', (e) => {
